@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>V1toV2 — Operations as a system</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<style>
+  :root {
+    --bg: #FAFAF7;
+    --bg-tint: #F4F4EE;
+    --ink: #0B0B0A;
+    --ink-2: #1A1A18;
+    --muted: #6B6B66;
+    --muted-2: #9A9A93;
+    --line: #E7E7E0;
+    --line-2: #D9D9D1;
+    --card: #FFFFFF;
+    --accent: oklch(0.86 0.22 142);
+    --accent-ink: oklch(0.32 0.12 142);
+    --accent-soft: oklch(0.94 0.08 142);
+    --warn: oklch(0.7 0.16 30);
+    --warn-soft: oklch(0.95 0.05 40);
+    --radius: 10px;
+    --radius-lg: 14px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Geist', ui-sans-serif, system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "ss01", "cv11";
+    line-height: 1.5;
+  }
+  .mono { font-family: 'Geist Mono', ui-monospace, monospace; font-feature-settings: normal; }
+  ::selection { background: var(--accent); color: var(--ink); }
+  button { font-family: inherit; }
+  a { color: inherit; }
+
+  .grid-bg {
+    background-image:
+      linear-gradient(to right, rgba(11,11,10,0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(11,11,10,0.04) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  /* Print rules */
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+  @media print {
+    html, body {
+      background: var(--bg) !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    * {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    /* Sticky nav becomes static so it doesn't repeat / overlay */
+    header[data-nav] {
+      position: static !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      background: var(--bg) !important;
+    }
+    /* Each major section starts on a fresh page */
+    main > section {
+      break-before: page;
+      page-break-before: always;
+      break-inside: avoid-page;
+    }
+    main > section:first-child {
+      break-before: auto;
+      page-break-before: auto;
+    }
+    /* Avoid splitting cards/rows awkwardly */
+    .pb-avoid { break-inside: avoid; page-break-inside: avoid; }
+    /* Disable hover/transform/animation effects */
+    *, *::before, *::after {
+      transition: none !important;
+      animation: none !important;
+    }
+  }
+</style>
+<script type="application/json" id="speaker-notes">[]</script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" src="components/primitives.jsx"></script>
+<script type="text/babel" src="components/nav.jsx"></script>
+<script type="text/babel" src="components/hero.jsx"></script>
+<script type="text/babel" src="components/compare.jsx"></script>
+<script type="text/babel" src="components/painpoints.jsx"></script>
+<script type="text/babel" src="components/build.jsx"></script>
+<script type="text/babel" src="components/workflows.jsx"></script>
+<script type="text/babel" src="components/packages.jsx"></script>
+<script type="text/babel" src="components/credibility.jsx"></script>
+<script type="text/babel" src="components/process.jsx"></script>
+<script type="text/babel" src="components/cta.jsx"></script>
+<script type="text/babel" src="components/footer.jsx"></script>
+<script type="text/babel" src="app.jsx"></script>
+
+<script type="text/babel">
+  // Wait for fonts + React render, then auto-print
+  (async () => {
+    try { if (document.fonts && document.fonts.ready) { await document.fonts.ready; } } catch (e) {}
+    // Wait for the app to mount
+    const waitForMount = () => new Promise(res => {
+      const check = () => {
+        const root = document.getElementById('root');
+        if (root && root.childElementCount > 0) res();
+        else requestAnimationFrame(check);
+      };
+      check();
+    });
+    await waitForMount();
+    await new Promise(r => setTimeout(r, 800));
+    window.print();
+  })();
+</script>
+</body>
+</html>

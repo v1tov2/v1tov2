@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "V1toV2 — Turn manual operations into systems that scale",
+  title: "V1toV2 — From manual operations to scalable systems",
   description:
-    "We design and implement workflows, internal tools, and automation—plus practical AI where it earns its place—so your business runs faster and smoother.",
+    "V1toV2 helps growing businesses replace scattered manual workflows with internal tools, automation, and practical AI for clearer visibility and scalable operations.",
 };
 
 export default function RootLayout({

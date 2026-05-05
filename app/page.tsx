@@ -1,27 +1,33 @@
 import {
-  FinalCTA,
+  ExampleWorkflows,
+  FinalCta,
+  Footer,
   Hero,
-  HowItWorks,
-  SiteHeader,
-  WhatV1V2Means,
-  WhatWeDo,
-  WhoItsFor,
-  WhyV1toV2,
-} from "@/components/home";
+  Navbar,
+  Packages,
+  PainPoints,
+  Process,
+  SourcexpressProof,
+  V1V2Comparison,
+  WhatWeBuild,
+} from "@/components/home-v2";
 
 export default function Home() {
   return (
     <div className="flex flex-1 flex-col">
-      <SiteHeader />
+      <Navbar />
       <main className="flex-1">
         <Hero />
-        <WhatV1V2Means />
-        <WhoItsFor />
-        <WhatWeDo />
-        <WhyV1toV2 />
-        <HowItWorks />
-        <FinalCTA />
+        <V1V2Comparison />
+        <PainPoints />
+        <WhatWeBuild />
+        <ExampleWorkflows />
+        <Packages />
+        <SourcexpressProof />
+        <Process />
+        <FinalCta />
       </main>
+      <Footer />
     </div>
   );
 }
