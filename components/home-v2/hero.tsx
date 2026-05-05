@@ -768,7 +768,7 @@ export function Hero() {
             <span>Now booking · Limited build slots available</span>
           </div>
           <p className="mono text-[11px] font-medium uppercase tracking-[0.06em] text-zinc-500 sm:shrink-0 sm:text-right dark:text-zinc-400">
-            Operator-led · Est. 2024
+            Operator-led · Est. 2025
           </p>
         </div>
 

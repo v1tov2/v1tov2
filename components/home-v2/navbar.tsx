@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const links = [
@@ -15,11 +16,21 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-zinc-200/80 bg-[color-mix(in_srgb,var(--background)_88%,transparent)] backdrop-blur-md dark:border-zinc-800 dark:bg-[color-mix(in_srgb,#0a0a0a_88%,transparent)]">
       <div className="mx-auto flex max-w-[1200px] items-center justify-between gap-3 px-5 py-3.5 sm:px-6 md:px-8">
-        <Link
-          href="/"
-          className="shrink-0 font-mono text-[13px] font-semibold tracking-[-0.02em] text-zinc-900 dark:text-zinc-100"
-        >
-          V1<span className="text-zinc-400 dark:text-zinc-500">→</span>V2
+        <Link href="/" className="shrink-0 text-zinc-900 dark:text-zinc-100">
+          <div className="flex items-center gap-2">
+            <div className="flex h-6 w-6 items-center justify-center rounded-md border border-zinc-300 bg-white dark:border-zinc-600 dark:bg-zinc-900">
+              <Image
+                src="/v2-icon.svg"
+                alt="V2"
+                width={14}
+                height={14}
+                unoptimized
+              />
+            </div>
+            <span className="text-[13px] font-medium tracking-tight">
+              V1 → V2
+            </span>
+          </div>
         </Link>
 
         <nav
