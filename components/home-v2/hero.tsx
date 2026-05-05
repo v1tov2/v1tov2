@@ -60,7 +60,13 @@ function Sparkline() {
   );
 }
 
-function V2Surface({ tick }: { tick: number }) {
+function V2Surface({
+  tick,
+  stacked,
+}: {
+  tick: number;
+  stacked?: boolean;
+}) {
   const nav = [
     "Inbox",
     "Orders",
@@ -86,10 +92,20 @@ function V2Surface({ tick }: { tick: number }) {
 
   return (
     <div
-      className="absolute inset-0 flex flex-col gap-3 bg-gradient-to-b from-white to-[#F8F8F4] p-4 text-zinc-900 sm:gap-4 sm:p-5 lg:grid lg:grid-cols-[minmax(0,150px)_minmax(0,1fr)_minmax(0,200px)] lg:gap-4 lg:p-6 dark:from-zinc-900 dark:to-zinc-950 dark:text-zinc-50"
+      className={
+        stacked
+          ? "relative w-full min-w-0 flex flex-col gap-3 bg-gradient-to-b from-white to-[#F8F8F4] p-4 text-zinc-900 dark:from-zinc-900 dark:to-zinc-950 dark:text-zinc-50"
+          : "absolute inset-0 flex flex-col gap-3 bg-gradient-to-b from-white to-[#F8F8F4] p-4 text-zinc-900 sm:gap-4 sm:p-5 lg:grid lg:grid-cols-[minmax(0,150px)_minmax(0,1fr)_minmax(0,200px)] lg:gap-4 lg:p-6 dark:from-zinc-900 dark:to-zinc-950 dark:text-zinc-50"
+      }
       style={{ ["--hero-accent" as string]: ACCENT }}
     >
-      <div className="flex min-h-0 flex-col gap-1 max-lg:hidden">
+      <div
+        className={
+          stacked
+            ? "hidden"
+            : "flex min-h-0 flex-col gap-1 max-lg:hidden"
+        }
+      >
         <p className="mono mb-2 px-2 text-[10px] font-medium uppercase tracking-[0.12em] text-zinc-500 dark:text-zinc-400">
           Operations OS
         </p>
@@ -455,7 +471,11 @@ function V1Surface() {
   );
 }
 
+const SPLIT_MIN_PCT = 5;
+const SPLIT_MAX_PCT = 95;
+
 function SplitPanel({ stageId }: { stageId: string }) {
+  const [mobileView, setMobileView] = useState<"v1" | "v2">("v2");
   const [pos, setPos] = useState(50);
   const [dragging, setDragging] = useState(false);
   const drag = useRef(false);
@@ -463,9 +483,15 @@ function SplitPanel({ stageId }: { stageId: string }) {
 
   const onMove = useCallback((clientX: number) => {
     if (!drag.current || !ref.current) return;
+    if (typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches) {
+      return;
+    }
     const rect = ref.current.getBoundingClientRect();
     const x = clientX - rect.left;
-    const p = Math.max(8, Math.min(92, (x / rect.width) * 100));
+    const p = Math.max(
+      SPLIT_MIN_PCT,
+      Math.min(SPLIT_MAX_PCT, (x / rect.width) * 100),
+    );
     setPos(p);
   }, []);
 
@@ -508,7 +534,8 @@ function SplitPanel({ stageId }: { stageId: string }) {
             className="size-1.5 shrink-0 rounded-full"
             style={{ background: ACCENT_INK }}
           />
-          Drag to transform · V1 → V2
+          <span className="md:hidden">TAP TO TRANSFORM · V1 → V2</span>
+          <span className="hidden md:inline">DRAG TO TRANSFORM · V1 → V2</span>
         </p>
         <p className="mono hidden text-[11.5px] text-zinc-500 sm:flex sm:items-center sm:gap-4 dark:text-zinc-400">
           <span>SAME OPS</span>
@@ -520,72 +547,132 @@ function SplitPanel({ stageId }: { stageId: string }) {
       <div
         ref={ref}
         id={stageId}
-        className="split-stage relative h-[320px] select-none overflow-hidden rounded-[14px] border border-zinc-300 bg-white shadow-[0_1px_0_rgba(11,11,10,0.04),0_30px_60px_-30px_rgba(11,11,10,0.18)] sm:h-[360px] lg:h-[460px] dark:border-zinc-700 dark:bg-zinc-900"
+        className="split-stage relative flex w-full max-w-full flex-col overflow-hidden rounded-[14px] border border-zinc-300 bg-white shadow-[0_1px_0_rgba(11,11,10,0.04),0_30px_60px_-30px_rgba(11,11,10,0.18)] touch-manipulation [touch-action:manipulation] max-md:h-auto max-md:min-h-0 md:block md:h-[360px] md:min-h-0 md:select-none md:touch-auto md:[touch-action:auto] lg:h-[460px] dark:border-zinc-700 dark:bg-zinc-900"
       >
-        <V2Surface tick={tick} />
         <div
-          className="absolute inset-0"
-          style={{
-            clipPath: `polygon(0 0, ${pos}% 0, ${pos}% 100%, 0 100%)`,
-            WebkitClipPath: `polygon(0 0, ${pos}% 0, ${pos}% 100%, 0 100%)`,
-          }}
+          className="z-30 flex shrink-0 flex-col gap-0 border-b border-zinc-200/80 bg-[#FAFAF7]/95 px-2.5 pb-2 pt-2 backdrop-blur-md dark:border-zinc-700 dark:bg-zinc-950/90 md:hidden"
+          style={{ touchAction: "manipulation" }}
         >
-          <V1Surface />
+          <div
+            className="flex rounded-[10px] border border-zinc-200/90 bg-zinc-100/95 p-0.5 dark:border-zinc-600 dark:bg-zinc-800/90"
+            role="tablist"
+            aria-label="Compare V1 and V2"
+          >
+            <button
+              type="button"
+              role="tab"
+              aria-selected={mobileView === "v1"}
+              className={`mono min-h-[44px] flex-1 rounded-[8px] px-2 py-2 text-center text-[10.5px] font-medium uppercase tracking-[0.06em] transition ${
+                mobileView === "v1"
+                  ? "bg-white text-zinc-950 shadow-sm dark:bg-zinc-900 dark:text-zinc-50"
+                  : "text-zinc-500 dark:text-zinc-400"
+              }`}
+              onClick={() => setMobileView("v1")}
+            >
+              V1 Today
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={mobileView === "v2"}
+              className={`mono min-h-[44px] flex-1 rounded-[8px] px-2 py-2 text-center text-[10.5px] font-medium uppercase tracking-[0.06em] transition ${
+                mobileView === "v2"
+                  ? "bg-white text-zinc-950 shadow-sm ring-1 ring-[color-mix(in_oklab,var(--hero-accent)_38%,transparent)] dark:bg-zinc-900 dark:text-zinc-50"
+                  : "text-zinc-500 dark:text-zinc-400"
+              }`}
+              onClick={() => setMobileView("v2")}
+            >
+              V2 After
+            </button>
+          </div>
         </div>
+
         <div
-          className="pointer-events-none absolute bottom-0 top-0 w-px bg-zinc-950 dark:bg-white"
-          style={{
-            left: `${pos}%`,
-            transform: "translateX(-0.5px)",
-          }}
-        />
-        <button
-          type="button"
-          aria-label="Drag to compare V1 and V2"
-          aria-controls={stageId}
-          className={`absolute top-1/2 z-10 flex size-11 -translate-y-1/2 items-center justify-center rounded-full border bg-zinc-950 text-[#FAFAF7] shadow-[0_6px_20px_rgba(11,11,10,0.25)] outline-none transition-[box-shadow,border-color,ring-color] duration-150 focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 dark:bg-white dark:text-zinc-900 dark:focus-visible:ring-offset-zinc-900 ${
-            dragging
-              ? "cursor-grabbing border-zinc-400 shadow-[0_8px_26px_rgba(11,11,10,0.32)] ring-2 ring-zinc-900/20 ring-offset-2 ring-offset-white dark:border-zinc-500 dark:ring-white/25 dark:ring-offset-zinc-900"
-              : "cursor-grab border-zinc-200 hover:border-zinc-300 hover:shadow-[0_10px_28px_rgba(11,11,10,0.22)] hover:ring-2 hover:ring-zinc-400/30 hover:ring-offset-2 hover:ring-offset-white active:border-zinc-400 active:shadow-[0_8px_24px_rgba(11,11,10,0.26)] dark:border-zinc-600 dark:ring-offset-zinc-900 dark:hover:border-zinc-400 dark:hover:ring-white/20"
-          }`}
-          style={{ left: `${pos}%`, transform: "translate(-50%, -50%)" }}
-          onMouseDown={(e) => {
-            drag.current = true;
-            setDragging(true);
-            document.body.style.cursor = "grabbing";
-            e.preventDefault();
-          }}
-          onTouchStart={() => {
-            drag.current = true;
-            setDragging(true);
-          }}
+          className="relative min-h-0 min-w-0 max-h-[min(92vh,840px)] shrink-0 overflow-x-hidden overflow-y-auto overscroll-y-contain md:hidden"
+          style={{ touchAction: "pan-y" }}
         >
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
-            <path
-              d="M5 4L2 8l3 4M11 4l3 4-3 4"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </button>
-        <div className="pointer-events-none absolute left-3 top-3 z-20 sm:left-4 sm:top-4">
-          <span className="mono inline-flex rounded-full border border-amber-200/90 bg-amber-50 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-amber-900 dark:border-amber-900/50 dark:bg-amber-950/60 dark:text-amber-200">
-            V1 · Today
-          </span>
+          <div className="relative w-full min-w-0">
+            {mobileView === "v1" ? (
+              <div className="relative h-[328px] w-full min-w-0 overflow-x-hidden sm:h-[340px]">
+                <V1Surface />
+              </div>
+            ) : (
+              <V2Surface tick={tick} stacked />
+            )}
+          </div>
         </div>
-        <div className="pointer-events-none absolute right-3 top-3 z-20 sm:right-4 sm:top-4">
-          <span
-            className="mono inline-flex rounded-full border px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide"
+
+        <div className="relative hidden h-full min-h-0 min-w-0 overflow-hidden md:block">
+          <V2Surface tick={tick} />
+          <div
+            className="absolute inset-0"
             style={{
-              borderColor: `color-mix(in oklab, ${ACCENT} 40%, transparent)`,
-              background: `color-mix(in oklab, ${ACCENT} 18%, white)`,
-              color: ACCENT_INK,
+              clipPath: `polygon(0 0, ${pos}% 0, ${pos}% 100%, 0 100%)`,
+              WebkitClipPath: `polygon(0 0, ${pos}% 0, ${pos}% 100%, 0 100%)`,
             }}
           >
-            V2 · After
-          </span>
+            <V1Surface />
+          </div>
+          <div
+            className="pointer-events-none absolute bottom-0 top-0 w-px bg-zinc-950 dark:bg-white"
+            style={{
+              left: `${pos}%`,
+              transform: "translateX(-0.5px)",
+            }}
+          />
+          <button
+            type="button"
+            aria-label="Drag to compare V1 and V2"
+            aria-controls={stageId}
+            className={`absolute top-1/2 z-10 flex size-14 min-h-[52px] min-w-[52px] -translate-y-1/2 touch-manipulation items-center justify-center rounded-full border bg-zinc-950 text-[#FAFAF7] shadow-[0_6px_20px_rgba(11,11,10,0.25)] outline-none transition-[box-shadow,border-color,ring-color] duration-150 focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 sm:size-11 sm:min-h-0 sm:min-w-0 dark:bg-white dark:text-zinc-900 dark:focus-visible:ring-offset-zinc-900 ${
+              dragging
+                ? "cursor-grabbing border-zinc-400 shadow-[0_8px_26px_rgba(11,11,10,0.32)] ring-2 ring-zinc-900/20 ring-offset-2 ring-offset-white dark:border-zinc-500 dark:ring-white/25 dark:ring-offset-zinc-900"
+                : "cursor-grab border-zinc-200 hover:border-zinc-300 hover:shadow-[0_10px_28px_rgba(11,11,10,0.22)] hover:ring-2 hover:ring-zinc-400/30 hover:ring-offset-2 hover:ring-offset-white active:border-zinc-400 active:shadow-[0_8px_24px_rgba(11,11,10,0.26)] dark:border-zinc-600 dark:ring-offset-zinc-900 dark:hover:border-zinc-400 dark:hover:ring-white/20"
+            }`}
+            style={{ left: `${pos}%`, transform: "translate(-50%, -50%)" }}
+            onMouseDown={(e) => {
+              drag.current = true;
+              setDragging(true);
+              document.body.style.cursor = "grabbing";
+              e.preventDefault();
+            }}
+            onTouchStart={() => {
+              drag.current = true;
+              setDragging(true);
+            }}
+          >
+            <svg
+              className="size-5 sm:size-4"
+              viewBox="0 0 16 16"
+              fill="none"
+              aria-hidden
+            >
+              <path
+                d="M5 4L2 8l3 4M11 4l3 4-3 4"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+          <div className="pointer-events-none absolute left-3 top-3 z-20 sm:left-4 sm:top-4">
+            <span className="mono inline-flex rounded-full border border-amber-200/90 bg-amber-50 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-amber-900 dark:border-amber-900/50 dark:bg-amber-950/60 dark:text-amber-200">
+              V1 · Today
+            </span>
+          </div>
+          <div className="pointer-events-none absolute right-3 top-3 z-20 sm:right-4 sm:top-4">
+            <span
+              className="mono inline-flex rounded-full border px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide"
+              style={{
+                borderColor: `color-mix(in oklab, ${ACCENT} 40%, transparent)`,
+                background: `color-mix(in oklab, ${ACCENT} 18%, white)`,
+                color: ACCENT_INK,
+              }}
+            >
+              V2 · After
+            </span>
+          </div>
         </div>
       </div>
     </div>
@@ -681,7 +768,7 @@ export function Hero() {
             <span>Now booking · Limited build slots available</span>
           </div>
           <p className="mono text-[11px] font-medium uppercase tracking-[0.06em] text-zinc-500 sm:shrink-0 sm:text-right dark:text-zinc-400">
-            Operator-led · Est. 2025
+            Operator-led · Est. 2024
           </p>
         </div>
 
@@ -713,17 +800,17 @@ export function Hero() {
             scale — without adding more headcount or chasing things across tabs.
             Built by an operator who’s done it for real.
           </p>
-          <div className="flex flex-col items-center gap-3.5 pt-0.5 sm:items-stretch lg:items-start lg:pt-1">
-            <div className="flex w-full max-w-md flex-col gap-2.5 sm:mx-auto sm:max-w-none sm:flex-row sm:flex-wrap lg:mx-0">
+          <div className="flex w-full flex-col items-stretch gap-3 pt-0.5 sm:items-stretch lg:items-start lg:pt-1">
+            <div className="flex w-full flex-col gap-3 sm:mx-auto sm:flex-row sm:flex-wrap sm:gap-2.5 lg:mx-0">
               <Link
                 href="#contact"
-                className="inline-flex h-12 w-full flex-1 items-center justify-center rounded-lg bg-zinc-950 px-6 text-[15px] font-medium text-white shadow-sm transition hover:bg-zinc-800 sm:h-11 sm:w-auto sm:min-w-[200px] dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100"
+                className="inline-flex min-h-[52px] w-full flex-1 items-center justify-center rounded-lg bg-zinc-950 px-6 text-[15px] font-medium leading-snug text-white shadow-sm transition hover:bg-zinc-800 sm:h-11 sm:min-h-0 sm:w-auto sm:min-w-[200px] dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100"
               >
                 Book a free V2 Audit
               </Link>
               <Link
                 href="#workflows"
-                className="inline-flex h-12 w-full flex-1 items-center justify-center rounded-lg border border-zinc-300/90 bg-white px-6 text-[15px] font-medium text-zinc-900 transition hover:border-zinc-400 sm:h-11 sm:w-auto sm:min-w-[200px] dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:border-zinc-500"
+                className="inline-flex min-h-[52px] w-full flex-1 items-center justify-center rounded-lg border border-zinc-300/90 bg-white px-6 text-[15px] font-medium leading-snug text-zinc-900 transition hover:border-zinc-400 sm:h-11 sm:min-h-0 sm:w-auto sm:min-w-[200px] dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:border-zinc-500"
               >
                 See example workflows
               </Link>
