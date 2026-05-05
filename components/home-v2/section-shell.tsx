@@ -20,7 +20,7 @@ export function SectionShell({
   return (
     <section
       id={id}
-      className={`relative px-4 py-20 sm:px-6 sm:py-24 lg:px-8 lg:py-28 ${
+      className={`relative px-4 py-24 sm:px-6 sm:py-28 lg:px-8 lg:py-32 ${
         muted ? "bg-zinc-50/70 dark:bg-zinc-900/20" : ""
       }`}
     >
@@ -35,7 +35,7 @@ export function SectionShell({
               {eyebrow}
             </p>
           ) : null}
-          <h2 className="mt-4 text-balance text-4xl font-semibold tracking-tight text-zinc-950 dark:text-zinc-50 sm:text-5xl">
+          <h2 className="mt-4 text-balance text-4xl font-semibold tracking-tight text-zinc-950 dark:text-zinc-50 sm:text-5xl lg:text-[3.4rem]">
             {heading}
           </h2>
           {lead ? (
