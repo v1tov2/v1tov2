@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { V2AuditBookCtaLink } from "./v2-audit-book-cta-link";
 
 const ACCENT = "oklch(0.86 0.22 142)";
 
@@ -66,12 +67,12 @@ export function Footer() {
               >
                 hello@v1tov2.com
               </a>
-              <Link
+              <V2AuditBookCtaLink
                 href="#contact"
                 className="w-fit text-[15px] font-medium text-zinc-900 transition hover:text-zinc-600 dark:text-zinc-100 dark:hover:text-zinc-300"
               >
                 Book a free V2 Audit
-              </Link>
+              </V2AuditBookCtaLink>
             </div>
           </div>
         </div>

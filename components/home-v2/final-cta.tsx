@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { V2AuditBookCtaLink } from "./v2-audit-book-cta-link";
 
 const ACCENT = "oklch(0.86 0.22 142)";
 const ACCENT_INK = "oklch(0.32 0.12 142)";
@@ -87,7 +88,7 @@ export function FinalCta() {
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-              <Link
+              <V2AuditBookCtaLink
                 href="#contact"
                 className="inline-flex h-12 items-center justify-center rounded-lg px-7 text-[15px] font-semibold transition hover:opacity-95 sm:h-[3.25rem] sm:min-w-[220px]"
                 style={{
@@ -96,7 +97,7 @@ export function FinalCta() {
                 }}
               >
                 Book a free V2 Audit
-              </Link>
+              </V2AuditBookCtaLink>
               <Link
                 href={MAIL_GENERAL}
                 className="mono inline-flex h-12 items-center justify-center gap-2.5 rounded-lg border border-white/20 px-6 text-[13.5px] font-medium tracking-wide text-zinc-100 transition hover:border-white/30 hover:bg-white/5 sm:h-[3.25rem]"

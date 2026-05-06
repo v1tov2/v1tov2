@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { V2AuditBookCtaLink } from "./v2-audit-book-cta-link";
 import {
   useCallback,
   useEffect,
@@ -802,12 +803,12 @@ export function Hero() {
           </p>
           <div className="flex w-full flex-col items-stretch gap-3 pt-0.5 sm:items-stretch lg:items-start lg:pt-1">
             <div className="flex w-full flex-col gap-3 sm:mx-auto sm:flex-row sm:flex-wrap sm:gap-2.5 lg:mx-0">
-              <Link
+              <V2AuditBookCtaLink
                 href="#contact"
                 className="inline-flex min-h-[52px] w-full flex-1 items-center justify-center rounded-lg bg-zinc-950 px-6 text-[15px] font-medium leading-snug text-white shadow-sm transition hover:bg-zinc-800 sm:h-11 sm:min-h-0 sm:w-auto sm:min-w-[200px] dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100"
               >
                 Book a free V2 Audit
-              </Link>
+              </V2AuditBookCtaLink>
               <Link
                 href="#workflows"
                 className="inline-flex min-h-[52px] w-full flex-1 items-center justify-center rounded-lg border border-zinc-300/90 bg-white px-6 text-[15px] font-medium leading-snug text-zinc-900 transition hover:border-zinc-400 sm:h-11 sm:min-h-0 sm:w-auto sm:min-w-[200px] dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:border-zinc-500"

@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { V2AuditBookCtaLink } from "./v2-audit-book-cta-link";
 
 const ACCENT = "oklch(0.86 0.22 142)";
 const WARN = "oklch(0.72 0.17 55)";
@@ -110,12 +110,12 @@ export function PainPoints() {
               obligation.
             </p>
           </div>
-          <Link
+          <V2AuditBookCtaLink
             href="#contact"
             className="inline-flex h-11 w-full shrink-0 items-center justify-center rounded-lg bg-zinc-950 px-6 text-[15px] font-medium text-white transition hover:bg-zinc-800 sm:h-10 sm:w-auto sm:min-w-[200px] dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100"
           >
             Book a free V2 Audit
-          </Link>
+          </V2AuditBookCtaLink>
         </div>
       </div>
     </section>

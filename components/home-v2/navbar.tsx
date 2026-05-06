@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { V2AuditBookCtaLink } from "./v2-audit-book-cta-link";
 
 const links = [
   { href: "#what-we-build", label: "What we build" },
@@ -44,12 +45,12 @@ export function Navbar() {
           ))}
         </nav>
 
-        <Link
+        <V2AuditBookCtaLink
           href="#contact"
           className="inline-flex h-9 shrink-0 items-center justify-center rounded-full bg-zinc-900 px-4 text-[13px] font-semibold text-white transition hover:bg-zinc-800 sm:h-10 sm:px-5 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-white"
         >
           Book a free V2 Audit
-        </Link>
+        </V2AuditBookCtaLink>
       </div>
 
       <div className="border-t border-zinc-200/80 md:hidden dark:border-zinc-800">
