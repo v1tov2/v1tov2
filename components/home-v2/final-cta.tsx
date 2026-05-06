@@ -31,6 +31,8 @@ const SNAPSHOT_SECTIONS = [
 ] as const;
 
 const MAIL_GENERAL = "mailto:hello@v1tov2.com";
+const MAIL_JEFFREY = "mailto:jeffrey@v1tov2.com";
+const WHATSAPP_URL = "https://wa.me/85292253889";
 
 export function FinalCta() {
   return (
@@ -59,7 +61,7 @@ export function FinalCta() {
       />
 
       <div className="relative mx-auto max-w-[1200px] px-5 sm:px-6 md:px-8">
-        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[1.18fr_1fr] lg:gap-16 xl:gap-20">
+        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-[1.18fr_1fr] lg:gap-16 xl:gap-20">
           <div className="min-w-0">
             <div className="inline-flex max-w-full items-center gap-2 rounded-full border border-white/15 px-3 py-1.5">
               <span
@@ -118,7 +120,57 @@ export function FinalCta() {
               </Link>
             </div>
 
-            <p className="mono mt-8 text-[11px] tracking-[0.06em] text-zinc-500">
+            <div className="mt-5 max-w-[32rem] border-t border-white/10 pt-4 sm:mt-6 sm:pt-5 max-md:pb-0">
+              <p className="mb-0 text-[13px] leading-snug text-zinc-500 md:mb-3">
+                Operator-led systems partner based in Hong Kong.
+              </p>
+
+              <div className="mt-3 md:hidden">
+                <div className="rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3">
+                  <div className="divide-y divide-white/10">
+                    <p className="py-2 text-[13px] font-semibold leading-snug text-white">
+                      Jeffrey Choi
+                    </p>
+                    <a
+                      href={WHATSAPP_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mono block py-2 text-[13px] leading-snug text-zinc-200 underline decoration-white/20 underline-offset-2 transition hover:text-white hover:decoration-white/45"
+                    >
+                      +852 9225 3889
+                    </a>
+                    <a
+                      href={MAIL_JEFFREY}
+                      className="mono block break-words py-2 text-[13px] leading-snug text-zinc-200 underline decoration-white/20 underline-offset-2 transition hover:text-white hover:decoration-white/45"
+                    >
+                      jeffrey@v1tov2.com
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div className="hidden grid-cols-3 gap-x-5 gap-y-0 items-baseline md:grid lg:gap-x-8">
+                <p className="text-[13.5px] font-medium leading-snug text-zinc-100">
+                  Jeffrey Choi
+                </p>
+                <a
+                  href={WHATSAPP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mono block text-[13px] leading-snug text-zinc-200 underline decoration-white/20 underline-offset-4 transition hover:text-white hover:decoration-white/45"
+                >
+                  +852 9225 3889
+                </a>
+                <a
+                  href={MAIL_JEFFREY}
+                  className="mono block break-all text-[13px] leading-snug text-zinc-200 underline decoration-white/20 underline-offset-4 transition hover:text-white hover:decoration-white/45"
+                >
+                  jeffrey@v1tov2.com
+                </a>
+              </div>
+            </div>
+
+            <p className="mono mt-4 text-[11px] tracking-[0.06em] text-zinc-500 md:mt-6">
               30 minutes · founder-led · no obligation
             </p>
           </div>
