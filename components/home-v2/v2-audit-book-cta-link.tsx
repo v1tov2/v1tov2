@@ -1,24 +1,17 @@
 "use client";
 
-import Link from "next/link";
 import type { ComponentProps } from "react";
-import { fireBookFreeV2AuditConversion } from "@/lib/analytics/google-ads-conversion";
+import { BookAuditScrollCta } from "@/components/shared/book-audit-scroll-cta";
 
-export type V2AuditBookCtaLinkProps = ComponentProps<typeof Link>;
+export type V2AuditBookCtaLinkProps = Omit<
+  ComponentProps<typeof BookAuditScrollCta>,
+  "conversion"
+>;
 
+/** @deprecated Import `BookAuditScrollCta` with `conversion="v2"` for new code. */
 export function V2AuditBookCtaLink({
   href = "#contact",
-  onClick,
   ...props
 }: V2AuditBookCtaLinkProps) {
-  return (
-    <Link
-      href={href}
-      {...props}
-      onClick={(e) => {
-        onClick?.(e);
-        fireBookFreeV2AuditConversion();
-      }}
-    />
-  );
+  return <BookAuditScrollCta conversion="v2" href={href} {...props} />;
 }

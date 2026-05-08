@@ -1,9 +1,7 @@
 import {
   ExampleWorkflows,
   FinalCta,
-  Footer,
   Hero,
-  Navbar,
   Packages,
   PainPoints,
   Process,
@@ -11,11 +9,13 @@ import {
   V1V2Comparison,
   WhatWeBuild,
 } from "@/components/home-v2";
+import { SiteFooter } from "@/components/shared/footer";
+import { SiteNavbar } from "@/components/shared/navbar";
 
 export default function Home() {
   return (
     <div className="flex flex-1 flex-col">
-      <Navbar />
+      <SiteNavbar />
       <main className="flex-1">
         <Hero />
         <V1V2Comparison />
@@ -27,7 +27,7 @@ export default function Home() {
         <Process />
         <FinalCta />
       </main>
-      <Footer />
+      <SiteFooter />
     </div>
   );
 }

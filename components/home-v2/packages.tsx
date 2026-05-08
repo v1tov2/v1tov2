@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { BookAuditScrollCta } from "@/components/shared/book-audit-scroll-cta";
 
 const ACCENT = "oklch(0.86 0.22 142)";
 const ACCENT_INK = "oklch(0.32 0.12 142)";
@@ -127,7 +127,8 @@ export function Packages() {
               ))}
             </ul>
 
-            <Link
+            <BookAuditScrollCta
+              conversion="v2"
               href="#contact"
               className="inline-flex h-11 w-full items-center justify-center rounded-lg text-[15px] font-medium transition hover:opacity-95 sm:h-10"
               style={{
@@ -136,7 +137,7 @@ export function Packages() {
               }}
             >
               {BUILD.cta} →
-            </Link>
+            </BookAuditScrollCta>
             </article>
 
             <article className="flex min-h-0 flex-col gap-5 rounded-[12px] border border-zinc-300/80 bg-[#FDFCF7] px-6 py-6 sm:px-6 sm:py-7 lg:py-6 dark:border-zinc-600 dark:bg-zinc-900/55">
@@ -186,12 +187,13 @@ export function Packages() {
               ))}
             </ul>
 
-            <Link
+            <BookAuditScrollCta
+              conversion="v2"
               href="#contact"
               className="inline-flex h-11 w-full items-center justify-center rounded-lg border border-zinc-400/75 bg-[#EDECE5] px-6 text-[15px] font-semibold text-zinc-900 transition hover:border-zinc-500 hover:bg-[#E5E4DD] sm:h-10 dark:border-zinc-500 dark:bg-zinc-800 dark:text-zinc-50 dark:hover:border-zinc-400 dark:hover:bg-zinc-700"
             >
               {OPERATE.cta} →
-            </Link>
+            </BookAuditScrollCta>
             </article>
           </div>
         </div>
@@ -218,12 +220,13 @@ export function Packages() {
               </p>
             </div>
           </div>
-          <Link
+          <BookAuditScrollCta
+            conversion="v2"
             href="#contact"
             className="inline-flex h-11 w-full shrink-0 items-center justify-center rounded-lg bg-zinc-950 px-6 text-[15px] font-medium text-white transition hover:bg-zinc-800 sm:h-10 sm:w-auto sm:min-w-[200px] dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100"
           >
             Book a V2 Audit →
-          </Link>
+          </BookAuditScrollCta>
         </div>
 
         <div className="mt-4 flex min-w-0 gap-3 rounded-[12px] border border-zinc-300/70 bg-[#FDFCF7] px-4 py-3 sm:px-5 dark:border-zinc-700/80 dark:bg-zinc-950/35">
