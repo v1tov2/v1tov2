@@ -1,426 +1,334 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import type { ReactNode } from "react";
 import { SiteNavbar } from "@/components/shared/navbar";
 import { BookAuditScrollCta } from "@/components/shared/book-audit-scroll-cta";
-import { SiteContactStrip } from "@/components/shared/site-contact-strip";
 import {
   ACCENT,
   ACCENT_INK,
   MAIL_HELLO,
+  MAIL_JEFFREY,
+  PHONE_DISPLAY,
   SITE_MAX,
   SITE_PAD_X,
 } from "@/components/shared/site-tokens";
-import { HeroDashboardMockup } from "@/components/website-support/hero-dashboard-mockup";
 
 const MAX = SITE_MAX;
 const PAD_X = SITE_PAD_X;
-const SECTION_Y =
-  "py-20 sm:py-[5.25rem] lg:py-[6.5rem]";
 
-/** Unified card — homepage warm surfaces */
+/** Closing CTA — email with clear subject for website inquiries. */
+const WEBSITE_SUPPORT_CONSULTATION_MAILTO =
+  "mailto:jeffrey@v1tov2.com?subject=" +
+  encodeURIComponent("Website consultation");
+
 const CARD =
   "rounded-xl border border-zinc-300/75 bg-[#FDFCF7] shadow-[0_1px_0_rgba(11,11,10,0.04)] dark:border-zinc-700/85 dark:bg-zinc-950/60 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]";
 
 export const metadata: Metadata = {
-  title: "Website Support & Development for Hong Kong Businesses | V1toV2",
+  title:
+    "Website Design, Development & Maintenance Hong Kong | SMEs | V1toV2",
   description:
-    "V1toV2 builds and supports Shopify, WordPress, Next.js, Supabase, and ecommerce websites for growing businesses in Hong Kong. Get ongoing website updates, improvements, and operational support.",
+    "Practical website design and website development in Hong Kong for SMEs: ongoing website maintenance, website revamps, WordPress support, Shopify support, and ecommerce website support for real business needs.",
 };
 
-const PLATFORM_STACK_GROUPS = [
+const SERVICE_CARDS = [
   {
-    title: "Ecommerce Platforms",
-    items: ["Shopify", "WooCommerce", "Squarespace"],
+    label: "Build",
+    title: "Website Design & Development",
+    body: "Corporate websites, landing pages, ecommerce websites, and service-focused business websites built for SMEs.",
   },
   {
-    title: "Website Management",
-    emphasized: true,
-    items: ["WordPress", "Website updates", "Ongoing support"],
+    label: "Maintain",
+    title: "Website Maintenance & Support",
+    body: "Content updates, backups, plugin updates, fixes, monitoring, security, and ongoing website support.",
   },
   {
-    title: "Custom Systems",
-    items: ["Next.js", "Supabase", "Admin dashboards"],
-  },
-] as const;
-
-const PROBLEMS = [
-  {
-    title: "Slow updates",
-    body: "Simple website changes become frustrating and time-consuming.",
-  },
-  {
-    title: "Multiple freelancers",
-    body: "Different developers, designers, and plugins create operational chaos.",
-  },
-  {
-    title: "Outdated workflows",
-    body: "Your business evolves, but your website and backend processes do not.",
-  },
-  {
-    title: "No long-term support",
-    body: "Most agencies disappear after launch instead of improving the system over time.",
+    label: "Revamp",
+    title: "Website Revamp",
+    body: "Improve outdated layouts, modernize branding, optimize mobile responsiveness, and restructure pages for clearer customer journeys.",
   },
 ] as const;
 
-const SERVICES = [
+const WEBSITE_PROJECTS = [
   {
-    title: "Shopify Stores",
-    body: "Store setup, redesigns, operational improvements, and ongoing support.",
+    name: "Alaya Consulting",
+    href: "https://alayaconsulting.com.hk/",
+    screenshot: "/images/website-support/alaya-home.png",
+    logo: "/images/website-support/alaya-logo.png",
+    screenshotAlt: "Alaya Consulting website homepage",
+    tags: ["Website Build", "Maintenance"] as const,
+    description:
+      "Built a professional consulting website focused on service clarity, trust, and easier navigation for business visitors.",
   },
   {
-    title: "WordPress Websites",
-    body: "Modern business websites with flexible content management and long-term maintenance.",
+    name: "Melani di moda",
+    href: "https://melanidimoda.co/",
+    screenshot: "/images/website-support/melani-home.png",
+    logo: "/images/website-support/melani-logo.png",
+    screenshotAlt: "Melani di moda ecommerce website",
+    tags: ["Ecommerce Support", "Maintenance"] as const,
+    description:
+      "Supported an ecommerce fashion website with ongoing updates, storefront maintenance, and product presentation improvements.",
   },
   {
-    title: "Website Maintenance & Updates",
-    body: "Content updates, fixes, improvements, integrations, and technical support.",
+    name: "Euro Home Direct",
+    href: "https://eurohomedirect.com/",
+    screenshot: "/images/website-support/ehd-home.png",
+    logo: "/images/website-support/ehd-logo.png",
+    screenshotAlt: "Euro Home Direct business website",
+    tags: ["Website Revamp", "Product Presentation"] as const,
+    description:
+      "Improved and maintained a business website designed to showcase products, company information, and customer-facing content more clearly.",
   },
   {
-    title: "Ecommerce Operations Support",
-    body: "Operational improvements for inventory, fulfillment, customer workflows, and backend processes.",
+    name: "Dawn Atelier Academy",
+    href: "https://dawnaa.com/",
+    screenshot: "/images/website-support/dawn-atelier-home.png",
+    logo: "/images/website-support/dawn-atelier-logo.png",
+    screenshotAlt: "Dawn Atelier Academy website",
+    tags: ["Website Build", "Website Support"] as const,
+    description:
+      "Built a modern website experience for an academy and training business with clearer program presentation and mobile-friendly layouts.",
   },
   {
-    title: "Custom Dashboards & Portals",
-    body: "Internal tools and admin systems tailored to your operations.",
+    name: "Walk Hong Kong",
+    href: "https://www.walkhongkong.com/",
+    screenshot: "/images/website-support/walk-hong-kong-home.png",
+    logo: "/images/website-support/walk-hong-kong-logo.png",
+    screenshotAlt: "Walk Hong Kong website homepage",
+    tags: ["Tour Booking", "Website Support"] as const,
+    description:
+      "Supported a walking-tour website with clearer routes, guide information, and enquiry paths for visitors booking private walks.",
   },
   {
-    title: "Next.js & Supabase Development",
-    body: "Modern web applications and scalable backend infrastructure for growing businesses.",
+    name: "Sunsmith",
+    href: "https://sunsmith.hk/",
+    screenshot: "/images/website-support/sunsmith-home.png",
+    logo: "/images/website-support/sunsmith-logo.png",
+    screenshotAlt: "Sunsmith jewelry website",
+    tags: ["Ecommerce Support", "Product Presentation"] as const,
+    description:
+      "Supported a jewelry ecommerce site with storefront updates, product presentation, and ongoing maintenance for collections and purchases.",
   },
 ] as const;
 
-const PROCESS_STEPS = [
+const PROJECT_CARD_HOVER =
+  "transition-[border-color,box-shadow] duration-200 hover:border-zinc-400/85 hover:shadow-[0_8px_30px_-26px_rgba(11,11,10,0.1),0_0_0_1px_color-mix(in_oklab,oklch(0.86_0.22_142)_0.08,transparent)] dark:hover:border-zinc-600/85";
+
+/** Two short service labels per project; single-row UI in cards */
+const PROJECT_PILL_ROW =
+  "flex min-h-[1.125rem] flex-nowrap items-center gap-1.5";
+const PROJECT_PILL =
+  "mono inline-flex shrink-0 items-center whitespace-nowrap rounded-full border border-zinc-200/65 bg-zinc-50/90 px-1.5 py-0.5 text-[9px] font-medium leading-none text-zinc-500 dark:border-zinc-700/45 dark:bg-zinc-900/32 dark:text-zinc-500 sm:text-[9.5px]";
+
+const projectLinkClass =
+  "mono inline-flex w-fit text-[12px] font-medium text-zinc-700 underline decoration-zinc-300/90 underline-offset-[3px] transition hover:text-zinc-900 hover:decoration-[color-mix(in_oklab,oklch(0.86_0.22_142)_50%,rgb(212_212_216))] dark:text-zinc-400 dark:decoration-zinc-600 dark:hover:text-zinc-200 dark:hover:decoration-[color-mix(in_oklab,oklch(0.86_0.22_142)_45%,rgb(82_82_91))]";
+
+/** Grouped operational review panels — asymmetrical layout in page */
+const WEBSITE_ISSUE_PANELS = [
   {
-    title: "Understand the business",
-    body: "We identify operational pain points, website gaps, and improvement opportunities.",
+    heading: "Design & Experience",
+    items: [
+      {
+        title: "Outdated website design",
+        impact:
+          "Older layouts can reduce trust and make the business feel less established online.",
+      },
+      {
+        title: "Poor mobile responsiveness",
+        impact:
+          "Customers leave before finding key information when pages feel awkward on phones.",
+      },
+      {
+        title: "Website doesn't reflect the business properly",
+        impact:
+          "Prospects misunderstand what you offer, who you serve, or how to take the next step.",
+      },
+      {
+        title: "Inconsistent branding and messaging",
+        impact:
+          "Pages, visuals, and messaging feel disconnected, making the business appear less cohesive online.",
+      },
+    ],
   },
   {
-    title: "Improve the system",
-    body: "From website updates to operational workflows, we help streamline how things work.",
+    heading: "Website Operations",
+    items: [
+      {
+        title: "Difficult content updates",
+        impact:
+          "Simple edits require technical help or workarounds, so updates to offers and messaging ship late.",
+      },
+      {
+        title: "Hard-to-manage website structure",
+        impact:
+          "Teams lose track of where content belongs, and important pages stay wrong or duplicated.",
+      },
+    ],
   },
   {
-    title: "Support long-term growth",
-    body: "Ongoing updates, improvements, and technical support as the business evolves.",
+    heading: "Performance & Maintenance",
+    items: [
+      {
+        title: "Slow or broken pages",
+        impact:
+          "Trust drops quickly when pages feel unreliable, errors appear, or checkout and forms fail.",
+      },
+      {
+        title: "No ongoing maintenance support",
+        impact:
+          "Without a steady owner, risk and drift add up until something breaks at the worst moment.",
+      },
+    ],
   },
 ] as const;
 
-const OPERATOR_PILLARS = [
+const ISSUE_PANEL_SHELL =
+  "relative flex h-full flex-col overflow-hidden rounded-2xl border border-zinc-300/72 bg-[#FBFAF6] shadow-[0_1px_0_rgba(11,11,10,0.035)] dark:border-zinc-700/78 dark:bg-zinc-950/45 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]";
+
+const WEBSITE_APPROACH_STEPS = [
   {
-    title: "We know real operations",
-    body: "Ecommerce, logistics, fulfillment, payments, and customer workflows — the parts that decide whether a site actually works.",
+    title: "Review the current website",
+    body: "We look at structure, content, performance, and how the site lines up with how you sell and support customers today.",
+    output: "Current-state review",
   },
   {
-    title: "Websites that support the business",
-    body: "When checkout, handoffs, or internal tools break, the site should help teams recover — not add confusion.",
+    title: "Identify what should improve",
+    body: "You get a clear list of priorities—design, speed, mobile, CMS friction, or ecommerce operations—before work starts.",
+    output: "Improvement plan",
   },
   {
-    title: "Built for Hong Kong teams",
-    body: "Fast updates, thin bandwidth, and tools that drift from reality — we design for that pressure, not only launch-day polish.",
+    title: "Design / build / restructure",
+    body: "We implement changes in a practical sequence: design updates, rebuilds, content moves, or platform fixes as needed.",
+    output: "Updated site",
+  },
+  {
+    title: "Maintain and improve over time",
+    body: "After launch, we stay available for website maintenance, security and plugin care, content help, and measured follow-up work.",
+    output: "Ongoing support",
   },
 ] as const;
 
-type SupportSnapshotRow = {
-  label: string;
-  value: string;
-  variant: "good" | "attention" | "neutral";
-};
-
-const SUPPORT_SNAPSHOT_ROWS: readonly SupportSnapshotRow[] = [
-  { label: "Website health", value: "Good", variant: "good" },
-  { label: "Pending plugin updates", value: "3", variant: "attention" },
-  { label: "Mobile responsiveness", value: "Pass", variant: "good" },
-  { label: "SEO checks", value: "Scheduled", variant: "neutral" },
-  { label: "Shopify app review", value: "2 flagged", variant: "attention" },
-  { label: "Backup status", value: "OK", variant: "good" },
-  { label: "Performance score", value: "86", variant: "neutral" },
-  { label: "Security patches", value: "Current", variant: "good" },
-  { label: "Ecommerce sync", value: "In sync", variant: "good" },
+/** Logos for “Websites built & maintained” trust panel */
+const HERO_TRUST_LOGOS = [
+  {
+    src: "/images/website-support/mimx-logo.png",
+    alt: "MIMX",
+  },
+  {
+    src: "/images/website-support/esg-newswire-logo.png",
+    alt: "ESG Newswire",
+  },
+  {
+    src: "/images/website-support/kjc-esports-logo.png",
+    alt: "KJC Esports",
+  },
+  {
+    src: "/images/website-support/wooaw-logo.png",
+    alt: "Wooaw",
+  },
+  {
+    src: "/images/website-support/gospace-logo.png",
+    alt: "Gospace",
+  },
+  {
+    src: "/images/website-support/tern-logo.png",
+    alt: "Tern",
+  },
+  {
+    src: "/images/website-support/holga-logo.png",
+    alt: "Holga",
+  },
+  {
+    src: "/images/website-support/lets-go-green-logo.png",
+    alt: "Let's Go Green",
+  },
 ] as const;
 
-function SectionEyebrow({ children }: { children: string }) {
-  return (
-    <p className="mono inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.08em] text-zinc-500 dark:text-zinc-400">
-      <span
-        className="size-1.5 shrink-0 rounded-full"
-        style={{
-          background: ACCENT,
-          boxShadow: `0 0 0 3px color-mix(in oklab, ${ACCENT} 25%, transparent)`,
-        }}
-      />
-      {children}
-    </p>
-  );
-}
-
-function SectionHeader({
-  eyebrow,
-  title,
-  lead,
+function IssueReviewPanel({
+  panel,
 }: {
-  eyebrow: string;
-  title: string;
-  lead: string;
+  panel: (typeof WEBSITE_ISSUE_PANELS)[number];
 }) {
+  const { heading, items } = panel;
   return (
-    <div className="max-w-[42rem]">
-      <SectionEyebrow>{eyebrow}</SectionEyebrow>
-      <h2 className="mt-5 text-balance text-[clamp(26px,3.5vw,40px)] font-semibold leading-[1.08] tracking-[-0.028em] text-zinc-950 dark:text-zinc-50 sm:mt-6">
-        {title}
-      </h2>
-      <p className="mt-5 text-pretty text-[17px] leading-[1.55] text-zinc-600 dark:text-zinc-400 sm:text-[18px]">
-        {lead}
-      </p>
-    </div>
-  );
-}
-
-function PageSection({
-  id,
-  children,
-  first,
-  glow = "none",
-  band = "a",
-}: {
-  id?: string;
-  children: ReactNode;
-  first?: boolean;
-  glow?: "none" | "top" | "bottom";
-  band?: "a" | "b";
-}) {
-  const bandBg =
-    band === "a"
-      ? "bg-[#F5F4EF] dark:bg-zinc-950"
-      : "bg-[#FDFCF7] dark:bg-zinc-950";
-
-  return (
-    <section
-      id={id}
-      className={`relative scroll-mt-24 ${SECTION_Y} ${bandBg} ${first ? "" : "border-t border-zinc-200/80 dark:border-white/[0.07]"}`}
-    >
-      {glow === "top" ? (
-        <>
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-[radial-gradient(ellipse_70%_100%_at_50%_0%,color-mix(in_oklab,oklch(0.86_0.22_142)_14%,#fff),transparent)] opacity-50 dark:hidden"
-          />
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-x-0 top-0 hidden h-40 bg-[radial-gradient(ellipse_70%_100%_at_50%_0%,color-mix(in_oklab,oklch(0.86_0.22_142)_9%,transparent),transparent)] opacity-80 dark:block"
-          />
-        </>
-      ) : null}
-      {glow === "bottom" ? (
-        <>
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-x-0 bottom-0 h-48 bg-[radial-gradient(ellipse_65%_90%_at_50%_100%,color-mix(in_oklab,oklch(0.86_0.22_142)_12%,#fff),transparent)] opacity-45 dark:hidden"
-          />
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-x-0 bottom-0 hidden h-48 bg-[radial-gradient(ellipse_65%_90%_at_50%_100%,color-mix(in_oklab,oklch(0.86_0.22_142)_8%,transparent),transparent)] opacity-70 dark:block"
-          />
-        </>
-      ) : null}
-      <div className={`relative ${MAX} ${PAD_X}`}>{children}</div>
-    </section>
-  );
-}
-
-function snapshotDot(variant: SupportSnapshotRow["variant"]) {
-  if (variant === "good")
-    return {
-      background: ACCENT,
-      boxShadow: `0 0 0 3px color-mix(in oklab, ${ACCENT} 28%, transparent)`,
-    };
-  if (variant === "attention")
-    return {
-      background: "oklch(0.78 0.16 75)",
-      boxShadow: "0 0 0 3px color-mix(in oklab, oklch(0.78 0.16 75) 22%, transparent)",
-    };
-  return {
-    background: "rgb(161 161 170)",
-    boxShadow: "0 0 0 2px rgba(11, 11, 10, 0.06)",
-  };
-}
-
-function PlatformStackGroups() {
-  return (
-    <div className="relative mt-9 sm:mt-10">
+    <article className={ISSUE_PANEL_SHELL}>
       <div
         aria-hidden
-        className="pointer-events-none absolute -inset-x-4 top-1/2 hidden h-px -translate-y-1/2 lg:block"
+        className="h-[2px] w-full shrink-0 opacity-90"
         style={{
-          background: `linear-gradient(90deg, transparent 0%, color-mix(in oklab, ${ACCENT} 20%, rgb(228 228 231)) 18%, color-mix(in oklab, ${ACCENT} 14%, rgb(212 212 216)) 50%, color-mix(in oklab, ${ACCENT} 20%, rgb(228 228 231)) 82%, transparent 100%)`,
+          background: `linear-gradient(90deg, color-mix(in oklab, ${ACCENT} 12%, transparent) 0%, color-mix(in oklab, ${ACCENT} 38%, transparent) 45%, color-mix(in oklab, ${ACCENT} 12%, transparent) 100%)`,
         }}
       />
-      <ul className="relative grid list-none gap-5 p-0 sm:gap-6 lg:grid-cols-3 lg:items-stretch lg:gap-6">
-        {PLATFORM_STACK_GROUPS.map((group, i) => {
-          const emphasized = "emphasized" in group && group.emphasized;
-          return (
-            <li key={group.title} className="relative">
-              <span
-                aria-hidden
-                className="absolute -top-1 left-1/2 z-[1] hidden size-2 -translate-x-1/2 rounded-full lg:block"
-                style={{
-                  background: ACCENT,
-                  boxShadow: `0 0 0 4px color-mix(in oklab, ${ACCENT} 12%, #F5F4EF)`,
-                }}
-              />
-              <div
-                className={`relative flex h-full flex-col overflow-hidden rounded-2xl border bg-gradient-to-b p-6 sm:p-7 dark:shadow-[0_20px_44px_-28px_rgba(0,0,0,0.45)] ${
-                  emphasized
-                    ? "border-zinc-300/90 from-white/98 via-[#FAFAF7]/98 to-[#F3F2EC]/90 shadow-[0_20px_48px_-20px_rgba(11,11,10,0.12)] lg:z-[2] lg:-translate-y-1.5 dark:border-zinc-600/80 dark:from-zinc-900/80 dark:via-zinc-950/75 dark:to-zinc-950/85"
-                    : "border-zinc-300/75 from-white/92 via-[#FDFCF7]/95 to-[#F6F5F0]/88 shadow-[0_10px_36px_-22px_rgba(11,11,10,0.09)] dark:border-zinc-700/75 dark:from-zinc-900/55 dark:via-zinc-950/50 dark:to-zinc-950/60"
-                }`}
-                style={{
-                  borderColor: emphasized
-                    ? `color-mix(in oklab, ${ACCENT} 16%, rgb(212 212 216 / 0.85))`
-                    : `color-mix(in oklab, ${ACCENT} 7%, rgb(212 212 216 / 0.85))`,
-                }}
-              >
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute inset-0 opacity-[0.28] dark:opacity-[0.18]"
-                  style={{
-                    backgroundImage: `
-                      linear-gradient(to right, rgba(11,11,10,0.025) 1px, transparent 1px),
-                      linear-gradient(to bottom, rgba(11,11,10,0.025) 1px, transparent 1px)
-                    `,
-                    backgroundSize: "40px 40px",
-                    maskImage:
-                      "radial-gradient(ellipse 95% 85% at 40% 0%, black 8%, transparent 72%)",
-                    WebkitMaskImage:
-                      "radial-gradient(ellipse 95% 85% at 40% 0%, black 8%, transparent 72%)",
-                  }}
-                />
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute -right-10 -top-8 h-32 w-32 rounded-full opacity-28 blur-2xl dark:opacity-40"
-                  style={{
-                    background: `radial-gradient(circle, color-mix(in oklab, ${ACCENT} 16%, white) 0%, transparent 72%)`,
-                  }}
-                />
-                <div className="relative flex items-start justify-between gap-3">
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-zinc-400 dark:text-zinc-500">
-                    {String(i + 1).padStart(2, "0")}
-                  </p>
-                  <span
-                    aria-hidden
-                    className="mt-0.5 size-1.5 shrink-0 rounded-full opacity-90"
-                    style={{
-                      background: ACCENT,
-                      boxShadow: `0 0 0 3px color-mix(in oklab, ${ACCENT} 18%, transparent)`,
-                    }}
-                  />
-                </div>
-                <h3 className="relative mt-4 text-[17px] font-semibold tracking-[-0.02em] text-zinc-950 sm:text-[18px] dark:text-zinc-50">
-                  {group.title}
-                </h3>
-                <ul className="relative mt-5 space-y-0 divide-y divide-zinc-200/70 dark:divide-white/[0.08]">
-                  {group.items.map((item) => (
-                    <li
-                      key={item}
-                      className="flex gap-3 py-3 pr-1 first:pt-0 last:pb-0"
-                    >
-                      <span
-                        aria-hidden
-                        className="mt-[0.45rem] size-1 shrink-0 rounded-full bg-zinc-300/90 dark:bg-white/20"
-                      />
-                      <span className="text-[15px] leading-snug text-zinc-700 dark:text-zinc-300">
-                        {item}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </li>
-          );
-        })}
-      </ul>
-    </div>
-  );
-}
-
-function WebsiteSupportSnapshotPanel() {
-  return (
-    <aside
-      className="relative min-w-0 overflow-hidden rounded-xl border border-zinc-300/75 bg-[#FDFCF7]/95 shadow-[0_1px_0_rgba(11,11,10,0.04),inset_0_1px_0_rgba(255,255,255,0.6)] backdrop-blur-[10px] dark:border-white/12 dark:bg-zinc-900/45 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]"
-      aria-labelledby="support-snapshot-heading"
-    >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -right-16 top-0 h-40 w-40 rounded-full opacity-40 blur-3xl dark:opacity-50"
-        style={{
-          background: `radial-gradient(circle, color-mix(in oklab, ${ACCENT} 22%, white) 0%, transparent 70%)`,
-        }}
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.4] dark:opacity-[0.28]"
-        style={{
-          backgroundImage: `
-            linear-gradient(to right, rgba(11,11,10,0.045) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(11,11,10,0.045) 1px, transparent 1px)
-          `,
-          backgroundSize: "32px 32px",
-          maskImage:
-            "radial-gradient(ellipse 90% 80% at 50% 0%, black 20%, transparent 75%)",
-          WebkitMaskImage:
-            "radial-gradient(ellipse 90% 80% at 50% 0%, black 20%, transparent 75%)",
-        }}
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 hidden opacity-30 dark:block"
-        style={{
-          backgroundImage: `
-            linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px)
-          `,
-          backgroundSize: "32px 32px",
-          maskImage:
-            "radial-gradient(ellipse 90% 80% at 50% 0%, black 20%, transparent 75%)",
-          WebkitMaskImage:
-            "radial-gradient(ellipse 90% 80% at 50% 0%, black 20%, transparent 75%)",
-        }}
-      />
-
-      <div className="relative border-b border-zinc-200/90 px-4 py-3.5 dark:border-white/10 sm:px-5 sm:py-4">
-        <h3
-          id="support-snapshot-heading"
-          className="text-[14px] font-semibold tracking-tight text-zinc-950 dark:text-white sm:text-[15px]"
-        >
-          Website Support Snapshot
+      <header className="border-b border-zinc-200/80 px-5 py-3.5 sm:px-6 sm:py-4 dark:border-zinc-700/65">
+        <h3 className="mono text-[10px] font-semibold uppercase tracking-[0.14em] text-zinc-600 dark:text-zinc-400">
+          {heading}
         </h3>
-        <p className="mono mt-1 text-[10.5px] leading-relaxed text-zinc-500 sm:text-[11px]">
-          Ongoing care — not a vanity dashboard.
-        </p>
-      </div>
-
-      <ul className="relative divide-y divide-zinc-200/80 px-2 py-1 dark:divide-white/[0.08] sm:px-3">
-        {SUPPORT_SNAPSHOT_ROWS.map((row) => (
-          <li
-            key={row.label}
-            className="flex items-center justify-between gap-3 px-2 py-2.5 sm:py-3"
-          >
-            <span className="flex min-w-0 items-center gap-2.5">
-              <span
-                className="size-1.5 shrink-0 rounded-full"
-                style={snapshotDot(row.variant)}
-                aria-hidden
-              />
-              <span className="truncate text-[12px] leading-snug text-zinc-800 dark:text-zinc-300 sm:text-[13px]">
-                {row.label}
-              </span>
-            </span>
-            <span className="mono shrink-0 text-[11px] font-medium text-zinc-600 dark:text-zinc-400 sm:text-[12px]">
-              {row.value}
-            </span>
+      </header>
+      <ul className="flex flex-1 flex-col divide-y divide-zinc-200/80 dark:divide-zinc-700/60">
+        {items.map((row) => (
+          <li key={row.title} className="px-5 py-3.5 sm:px-6 sm:py-4">
+            <h4 className="text-[15px] font-semibold leading-snug tracking-[-0.012em] text-zinc-950 dark:text-zinc-50 sm:text-[16px]">
+              {row.title}
+            </h4>
+            <p className="mt-1.5 text-pretty text-[14px] leading-[1.52] text-zinc-600 dark:text-zinc-400 sm:mt-2 sm:text-[15px] sm:leading-[1.53]">
+              {row.impact}
+            </p>
           </li>
         ))}
       </ul>
-    </aside>
+    </article>
+  );
+}
+
+/** Three previews — stacked on mobile, layered from lg up */
+function HeroWebsiteCollage() {
+  const frame =
+    "overflow-hidden rounded-xl border border-zinc-200/95 bg-white shadow-[0_16px_48px_-26px_rgba(11,11,10,0.2)] ring-1 ring-zinc-900/[0.05] dark:border-zinc-600/55 dark:bg-zinc-900 dark:shadow-[0_24px_56px_-30px_rgba(0,0,0,0.48)] dark:ring-white/[0.06]";
+  return (
+    <div
+      className="mx-auto flex w-full max-w-[520px] flex-col gap-3.5 sm:gap-4 lg:relative lg:mx-0 lg:block lg:max-w-[540px] lg:min-h-[340px]"
+      aria-label="Website previews: Alaya Consulting, Dawn Atelier Academy, Euro Home Direct"
+    >
+      {/* Primary — Alaya */}
+      <div className={`${frame} relative w-full lg:absolute lg:right-0 lg:top-0 lg:z-[1] lg:w-[78%]`}>
+        <Image
+          src="/images/website-support/alaya-home.png"
+          alt="Alaya Consulting website preview"
+          width={1280}
+          height={720}
+          className="h-[152px] w-full object-cover object-top sm:h-[168px] lg:h-[188px] lg:max-h-none xl:h-[198px]"
+          sizes="(max-width: 1024px) 100vw, 400px"
+          priority
+        />
+      </div>
+      {/* Secondary — Dawn Atelier */}
+      <div
+        className={`${frame} relative w-full sm:max-w-[90%] lg:absolute lg:bottom-[10%] lg:left-0 lg:z-[2] lg:w-[52%] lg:max-w-none`}
+      >
+        <Image
+          src="/images/website-support/dawn-atelier-home.png"
+          alt="Dawn Atelier Academy website preview"
+          width={960}
+          height={720}
+          className="h-[136px] w-full object-cover object-top sm:h-[148px] lg:h-[138px] xl:h-[146px]"
+          sizes="(max-width: 1024px) 90vw, 280px"
+        />
+      </div>
+      {/* Tertiary — Euro Home Direct */}
+      <div
+        className={`${frame} relative ml-auto w-full max-w-[92%] sm:max-w-[88%] lg:absolute lg:bottom-0 lg:right-[4%] lg:z-[3] lg:ml-0 lg:w-[44%] lg:max-w-none`}
+      >
+        <Image
+          src="/images/website-support/ehd-home.png"
+          alt="Euro Home Direct website preview"
+          width={960}
+          height={640}
+          className="h-[128px] w-full object-cover object-top sm:h-[136px] lg:h-[128px] xl:h-[136px]"
+          sizes="(max-width: 1024px) 88vw, 240px"
+        />
+      </div>
+    </div>
   );
 }
 
@@ -429,482 +337,404 @@ export default function WebsiteSupportPage() {
     <div className="min-h-screen bg-[#FAFAF7] text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50">
       <SiteNavbar />
 
-      <main className="relative">
+      <main>
         {/* Hero */}
         <section
-          className="relative overflow-hidden border-b border-zinc-200/90 bg-[#FAFAF7] dark:border-zinc-800 dark:bg-zinc-950"
-          style={{ ["--hero-accent" as string]: ACCENT }}
+          className="relative border-b border-zinc-200/90 bg-[#FAFAF7] dark:border-zinc-800 dark:bg-zinc-950"
+          aria-labelledby="website-support-hero-heading"
         >
           <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 dark:hidden"
-            style={{
-              background: `
-            radial-gradient(ellipse 120% 85% at 50% -25%, color-mix(in oklab, ${ACCENT} 9%, white) 0%, transparent 55%),
-            radial-gradient(ellipse 65% 50% at 100% 0%, rgba(14, 165, 233, 0.055) 0%, transparent 52%),
-            radial-gradient(ellipse 50% 45% at 0% 65%, rgba(11, 11, 10, 0.028) 0%, transparent 55%)
-          `,
-            }}
-          />
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 hidden opacity-70 dark:block"
-            style={{
-              background: `
-            radial-gradient(ellipse 100% 70% at 50% -30%, color-mix(in oklab, ${ACCENT} 12%, #0a0a0a) 0%, transparent 58%),
-            radial-gradient(ellipse 55% 40% at 95% 5%, rgba(14, 165, 233, 0.06) 0%, transparent 50%),
-            radial-gradient(ellipse 45% 35% at 5% 60%, rgba(255, 255, 255, 0.03) 0%, transparent 55%)
-          `,
-            }}
-          />
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 opacity-[0.5] dark:opacity-[0.32]"
-            style={{
-              backgroundImage: `
-            linear-gradient(to right, rgba(11,11,10,0.038) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(11,11,10,0.038) 1px, transparent 1px)
-          `,
-              backgroundSize: "56px 56px",
-              maskImage:
-                "radial-gradient(ellipse 75% 65% at 50% 32%, black 32%, transparent 76%)",
-              WebkitMaskImage:
-                "radial-gradient(ellipse 75% 65% at 50% 32%, black 32%, transparent 76%)",
-            }}
-          />
-
-          <div className={`relative ${MAX} ${PAD_X} pb-16 pt-10 sm:pb-20 sm:pt-12 md:pb-24 md:pt-14 lg:pb-28 lg:pt-[4.5rem]`}>
-            <div className="mb-8 flex max-w-[1140px] flex-col gap-3 sm:mb-10 sm:flex-row sm:items-center sm:justify-between sm:gap-4 lg:mb-12">
-              <div className="inline-flex max-w-full items-center gap-2 rounded-full border border-zinc-200/90 bg-white/75 px-3 py-1.5 text-[11px] font-medium text-zinc-700 shadow-[0_1px_0_rgba(11,11,10,0.04)] backdrop-blur-[8px] dark:border-zinc-700/90 dark:bg-zinc-900/55 dark:text-zinc-200">
-                <span
-                  className="size-1.5 shrink-0 rounded-full"
+            className={`relative ${MAX} ${PAD_X} pb-12 pt-10 sm:pb-14 sm:pt-12 md:pb-16 md:pt-14 lg:pb-16 lg:pt-14 xl:pb-[4.5rem] xl:pt-[4.25rem]`}
+          >
+            <div className="lg:grid lg:grid-cols-[minmax(0,1.06fr)_minmax(0,0.94fr)] lg:items-center lg:gap-12 xl:gap-16">
+            <div className="max-w-xl text-left">
+              <h1
+                id="website-support-hero-heading"
+                className="text-pretty text-[clamp(1.65rem,4vw,3rem)] font-semibold leading-[1.1] tracking-[-0.036em] text-zinc-950 dark:text-zinc-50 lg:text-[clamp(1.85rem,3.5vw,3.15rem)] lg:leading-[1.08]"
+              >
+                Website Design, Development & Maintenance for Hong Kong SMEs
+              </h1>
+              <p className="mt-6 max-w-xl text-pretty text-[clamp(1.0625rem,2vw,1.3125rem)] font-medium leading-snug text-zinc-800 dark:text-zinc-200">
+                We help businesses build and maintain professional websites — from
+                company websites and service pages to WordPress support, Shopify
+                maintenance, and website revamps.
+              </p>
+              <p className="mt-5 max-w-xl text-pretty text-[16px] leading-[1.62] text-zinc-600 dark:text-zinc-400 sm:text-[17px]">
+                Whether you need a new website, updates to an existing site, or
+                ongoing maintenance support, we build practical websites designed
+                around real business needs.
+              </p>
+              <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center lg:mt-10">
+                <BookAuditScrollCta
+                  conversion="website"
+                  href="#contact"
+                  className="inline-flex min-h-[48px] items-center justify-center rounded-lg px-8 text-[15px] font-semibold transition hover:opacity-95 sm:min-h-[44px]"
                   style={{
                     background: ACCENT,
-                    boxShadow: `0 0 0 3px color-mix(in oklab, ${ACCENT} 28%, transparent)`,
+                    color: ACCENT_INK,
                   }}
-                />
-                <span>Website support & development</span>
+                >
+                  Book a consultation
+                </BookAuditScrollCta>
+                <a
+                  href="#projects"
+                  className="inline-flex min-h-[48px] items-center justify-center rounded-lg border border-zinc-300/90 bg-white px-8 text-[15px] font-medium text-zinc-900 shadow-[0_1px_2px_rgba(11,11,10,0.04)] transition hover:border-zinc-400 sm:min-h-[44px] dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:border-zinc-500"
+                >
+                  View previous work
+                </a>
               </div>
-              <p className="mono text-[11px] font-medium uppercase tracking-[0.06em] text-zinc-500 sm:shrink-0 sm:text-right dark:text-zinc-400">
-                Hong Kong
-              </p>
             </div>
 
-            <div className="grid gap-10 lg:grid-cols-[1.06fr_0.94fr] lg:items-start lg:gap-14">
-              <div className="min-w-0">
-                <h1 className="max-w-[1140px] text-[clamp(30px,5.8vw,72px)] font-semibold leading-[0.98] tracking-[-0.035em] text-[#0B0B0A] dark:text-zinc-50">
-                  <span className="block">Modern websites built for</span>
-                  <span className="block text-zinc-500 dark:text-zinc-400">
-                    growing{" "}
-                    <span className="relative inline-block text-[#0B0B0A] dark:text-zinc-50">
-                      <span
-                        aria-hidden
-                        className="pointer-events-none absolute -left-[0.06em] -right-[0.04em] bottom-[0.04em] top-[40%] z-0 rounded-[0.14em]"
-                        style={{
-                          background: `linear-gradient(180deg, color-mix(in oklab, ${ACCENT} 78%, transparent) 0%, color-mix(in oklab, ${ACCENT} 64%, transparent) 100%)`,
-                          transform: "translateY(0.05em)",
-                        }}
-                      />
-                      <span className="relative z-[1]">businesses</span>
-                    </span>
-                    .
-                  </span>
-                </h1>
-
-                <p className="mono mt-6 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[11px] leading-relaxed text-zinc-500 sm:mt-7 sm:gap-x-4 dark:text-zinc-500">
-                  <span className="text-zinc-600 dark:text-zinc-400">Builds & ongoing support</span>
-                  <span aria-hidden className="hidden text-zinc-300 sm:inline dark:text-zinc-600">
-                    ·
-                  </span>
-                  <span>Shopify · WordPress · Next.js · Supabase</span>
-                  <span aria-hidden className="hidden text-zinc-300 sm:inline dark:text-zinc-600">
-                    ·
-                  </span>
-                  <span>Updates for HK teams</span>
-                </p>
-
-                <p className="mt-6 max-w-xl text-[17px] leading-[1.55] text-zinc-600 dark:text-zinc-400 sm:mt-7 sm:text-[18px] lg:max-w-[580px] lg:text-[19px]">
-                  We build and{" "}
-                  <strong className="font-medium text-zinc-900 dark:text-zinc-200">
-                    support websites end to end
-                  </strong>
-                  : storefronts, content sites, and admin tools — with clear
-                  ownership, steady updates, and room to grow.
-                </p>
-
-                <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center lg:mt-9">
-                  <BookAuditScrollCta
-                    conversion="website"
-                    href="#contact"
-                    className="inline-flex min-h-[52px] w-full flex-1 items-center justify-center rounded-lg px-7 text-[15px] font-semibold transition hover:opacity-95 sm:h-11 sm:min-h-0 sm:w-auto sm:min-w-[220px]"
-                    style={{
-                      background: ACCENT,
-                      color: ACCENT_INK,
-                    }}
-                  >
-                    Book a Free Website Audit
-                  </BookAuditScrollCta>
-                  <a
-                    href="#services"
-                    className="inline-flex min-h-[52px] w-full flex-1 items-center justify-center rounded-lg border border-zinc-300/90 bg-white px-6 text-[15px] font-medium text-zinc-900 shadow-sm transition hover:border-zinc-400 sm:h-11 sm:min-h-0 sm:w-auto sm:min-w-[180px] dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:border-zinc-500"
-                  >
-                    View Services
-                  </a>
-                </div>
-                <p className="mono mt-4 text-center text-[11px] tracking-wide text-zinc-500 sm:text-left">
-                  Email hello@v1tov2.com · Subject: Free Website Audit
-                </p>
-              </div>
-
-              <HeroDashboardMockup accent={ACCENT} />
+            <div className="mt-10 w-full overflow-x-clip sm:mt-11 lg:mt-0">
+              <HeroWebsiteCollage />
+            </div>
             </div>
           </div>
         </section>
 
-        <PageSection first glow="top" band="a">
-          <SectionHeader
-            eyebrow="Platforms"
-            title="Built With Modern Platforms"
-            lead="Teams already run on these stacks — we help you ship changes, keep plugins sane, and extend with Next.js or Supabase when you outgrow templates. When your site is tied to daily operations, you need maintenance — not only a launch date."
-          />
-
-          <PlatformStackGroups />
-        </PageSection>
-
-        <PageSection glow="none" band="b">
-          <SectionHeader
-            eyebrow="After launch"
-            title="Most Business Websites Stop Evolving After Launch"
-            lead="The business moves; the site doesn’t. That shows up as slow patches, messy handoffs, and tools that no longer match how you sell or serve — exactly where ongoing website support pays off."
-          />
-
-          <div className={`relative mt-10 overflow-hidden sm:mt-12 ${CARD}`}>
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-y-4 left-0 w-px opacity-80 dark:opacity-70"
-              style={{
-                background: `linear-gradient(180deg, transparent, color-mix(in oklab, ${ACCENT} 45%, rgb(212 212 216)), transparent)`,
-              }}
-            />
-            <ul className="relative divide-y divide-zinc-200/75 dark:divide-white/[0.08]">
-              {PROBLEMS.map((card) => (
-                <li
-                  key={card.title}
-                  className="flex gap-5 px-5 py-5 sm:gap-6 sm:px-7 sm:py-6"
-                >
-                  <span
-                    aria-hidden
-                    className="mt-1.5 size-2 shrink-0 rounded-full"
-                    style={{
-                      background: ACCENT,
-                      boxShadow: `0 0 0 3px color-mix(in oklab, ${ACCENT} 22%, transparent)`,
-                    }}
-                  />
-                  <div className="min-w-0">
-                    <h3 className="text-[16px] font-semibold leading-snug tracking-[-0.015em] text-zinc-950 dark:text-zinc-100 sm:text-[17px]">
-                      {card.title}
-                    </h3>
-                    <p className="mt-2 text-[14px] leading-relaxed text-zinc-600 dark:text-zinc-400">
-                      {card.body}
-                    </p>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </PageSection>
-
-        <PageSection id="services" glow="bottom" band="a">
-          <SectionHeader
-            eyebrow="Services"
-            title="What We Help Businesses With"
-            lead="Six clear areas — storefronts, content sites, ecommerce ops, and custom apps — so you know what we cover before you email. After we agree on priorities, we keep the same long-term rhythm: understand, improve, support."
-          />
-
-          <div className="mt-10 space-y-3 sm:mt-12 sm:space-y-4">
-            {SERVICES.map((s) => (
-              <div
-                key={s.title}
-                className={`flex flex-col gap-4 border-l-2 py-5 pl-5 sm:flex-row sm:items-start sm:gap-8 sm:py-6 sm:pl-7 ${CARD}`}
-                style={{
-                  borderLeftColor: `color-mix(in oklab, ${ACCENT} 55%, rgb(212 212 216))`,
-                }}
-              >
-                <h3 className="shrink-0 text-[16px] font-semibold leading-snug tracking-[-0.02em] text-zinc-950 sm:w-[min(240px,34%)] sm:text-[17px] dark:text-white">
-                  {s.title}
-                </h3>
-                <p className="min-w-0 text-[14.5px] leading-[1.55] text-zinc-600 dark:text-zinc-400 sm:pt-0.5 sm:text-[15px]">
-                  {s.body}
-                </p>
-              </div>
-            ))}
-          </div>
-        </PageSection>
-
-        <PageSection band="b">
-          <SectionHeader
-            eyebrow="How we work"
-            title="A Long-Term Website Partner — Not Just a One-Time Build"
-            lead="The same rhythm we use on complex systems work — understand, improve, support — applied to your website and the operations behind it."
-          />
-
-          <div className={`relative mt-10 sm:mt-12 ${CARD} overflow-hidden p-6 sm:p-8`}>
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-0 opacity-[0.35] dark:opacity-[0.2]"
-              style={{
-                backgroundImage: `
-              linear-gradient(to right, rgba(11,11,10,0.06) 1px, transparent 1px),
-              linear-gradient(to bottom, rgba(11,11,10,0.06) 1px, transparent 1px)
-            `,
-                backgroundSize: "40px 40px",
-              }}
-            />
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-0 hidden opacity-20 dark:block"
-              style={{
-                backgroundImage: `
-              linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
-              linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px)
-            `,
-                backgroundSize: "40px 40px",
-              }}
-            />
-            <div className="relative grid gap-8 md:grid-cols-3 md:gap-0 md:divide-x md:divide-zinc-200/80 dark:md:divide-white/10">
-              {PROCESS_STEPS.map((step, i) => (
-                <div
-                  key={step.title}
-                  className="md:px-6 lg:px-10 first:md:pl-0 last:md:pr-0"
-                >
-                  <span
-                    className="mono inline-flex size-8 items-center justify-center rounded-full border border-zinc-300/90 bg-[color-mix(in_oklab,oklch(0.86_0.22_142)_14%,white)] text-[12px] font-bold text-zinc-900 dark:border-zinc-600 dark:bg-zinc-900/85 dark:text-white"
-                    style={{
-                      borderColor: `color-mix(in oklab, ${ACCENT} 32%, rgb(212 212 216))`,
-                    }}
-                  >
-                    {i + 1}
-                  </span>
-                  <h3 className="mt-4 text-[15px] font-semibold text-zinc-950 dark:text-white sm:text-[16px]">
-                    {step.title}
-                  </h3>
-                  <p className="mt-2 text-[13.5px] leading-relaxed text-zinc-600 dark:text-zinc-400">
-                    {step.body}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </PageSection>
-
-        <PageSection glow="top" band="a">
-          <div className="relative overflow-hidden rounded-2xl border border-zinc-300/80 bg-gradient-to-b from-[#FDFCF7]/98 via-[#FAFAF7]/95 to-[#F4F3ED]/92 px-6 py-12 shadow-[0_20px_50px_-28px_rgba(11,11,10,0.1)] dark:border-zinc-600/70 dark:from-zinc-900/70 dark:via-zinc-950/65 dark:to-zinc-950/75 dark:shadow-[0_24px_60px_-28px_rgba(0,0,0,0.5)] sm:px-8 sm:py-14 lg:px-11 lg:py-16"
-            style={{
-              borderColor: `color-mix(in oklab, ${ACCENT} 12%, rgb(212 212 216 / 0.85))`,
-            }}
-          >
-            <div
-              aria-hidden
-              className="pointer-events-none absolute -left-20 top-0 h-72 w-72 rounded-full opacity-30 blur-3xl dark:opacity-45"
-              style={{
-                background: `radial-gradient(circle, color-mix(in oklab, ${ACCENT} 28%, white) 0%, transparent 70%)`,
-              }}
-            />
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-0 opacity-[0.4] dark:opacity-[0.28]"
-              style={{
-                backgroundImage: `
-                  linear-gradient(to right, rgba(11,11,10,0.038) 1px, transparent 1px),
-                  linear-gradient(to bottom, rgba(11,11,10,0.038) 1px, transparent 1px)
-                `,
-                backgroundSize: "48px 48px",
-                maskImage:
-                  "radial-gradient(ellipse 75% 70% at 20% 25%, black 12%, transparent 72%)",
-                WebkitMaskImage:
-                  "radial-gradient(ellipse 75% 70% at 20% 25%, black 12%, transparent 72%)",
-              }}
-            />
-
-            <div className="relative grid gap-12 lg:grid-cols-12 lg:gap-14 lg:gap-x-16">
-              <div className="lg:col-span-7">
-                <div className="inline-flex items-center gap-2.5">
-                  <span
-                    className="h-px w-8 shrink-0 rounded-full sm:w-10"
-                    style={{
-                      background: `linear-gradient(90deg, transparent, ${ACCENT})`,
-                    }}
-                    aria-hidden
-                  />
-                  <SectionEyebrow>Why V1toV2</SectionEyebrow>
-                </div>
-                <h2 className="mt-5 text-balance text-[clamp(1.75rem,4vw,2.75rem)] font-semibold leading-[1.06] tracking-[-0.032em] text-zinc-950 dark:text-zinc-50 sm:mt-6">
-                  Built by Operators,
-                  <span className="block text-zinc-600 dark:text-zinc-300">
-                    Not Just Designers
-                  </span>
-                </h2>
-                <p className="mt-6 max-w-xl text-pretty text-[18px] leading-[1.55] text-zinc-800 dark:text-zinc-200 sm:text-[19px]">
-                  We build websites for{" "}
-                  <strong className="font-semibold text-zinc-950 dark:text-white">
-                    real business operations
-                  </strong>
-                  — not only layouts and launch decks. Stores, fulfilment,
-                  payments, and customer workflows have to stay aligned when the
-                  site changes.
-                </p>
-                <p className="mt-5 max-w-xl text-[16px] leading-[1.6] text-zinc-600 dark:text-zinc-400 sm:text-[17px]">
-                  That means ecommerce, logistics, and day-to-day support
-                  pressure — the same reality Hong Kong teams face when the
-                  website is slow to update or doesn&apos;t match how you
-                  actually work.
-                </p>
-              </div>
-
-              <ul className="flex list-none flex-col gap-4 p-0 lg:col-span-5 lg:justify-center lg:gap-5">
-                {OPERATOR_PILLARS.map((pillar) => (
-                  <li
-                    key={pillar.title}
-                    className="rounded-xl border border-zinc-200/85 bg-white/75 px-5 py-4 shadow-[0_1px_0_rgba(11,11,10,0.03)] dark:border-white/[0.08] dark:bg-zinc-950/45 sm:px-6 sm:py-5"
-                    style={{
-                      borderColor: `color-mix(in oklab, ${ACCENT} 8%, rgb(228 228 231 / 0.95))`,
-                    }}
-                  >
-                    <p className="text-[15px] font-semibold leading-snug text-zinc-950 dark:text-zinc-50">
-                      {pillar.title}
-                    </p>
-                    <p className="mt-2 text-[14px] leading-relaxed text-zinc-600 dark:text-zinc-400">
-                      {pillar.body}
-                    </p>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </PageSection>
-
-        {/* Final CTA — single column, homepage final-cta atmosphere */}
+        {/* Services */}
         <section
-          id="contact"
-          className="relative scroll-mt-24 overflow-hidden border-t border-zinc-200/80 bg-[#F5F4EF] py-20 sm:py-24 lg:py-28 dark:border-white/10 dark:bg-zinc-950"
+          id="services"
+          className="scroll-mt-24 border-t border-zinc-200/75 bg-[#EDEBE3] py-14 text-left sm:py-20 lg:py-24 dark:border-zinc-800 dark:bg-zinc-950"
         >
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 opacity-[0.42] dark:hidden"
-            style={{
-              backgroundImage: `
-            linear-gradient(to right, rgba(11,11,10,0.045) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(11,11,10,0.045) 1px, transparent 1px)
-          `,
-              backgroundSize: "64px 64px",
-              maskImage:
-                "radial-gradient(ellipse 55% 55% at 50% 45%, black 28%, transparent 72%)",
-              WebkitMaskImage:
-                "radial-gradient(ellipse 55% 55% at 50% 45%, black 28%, transparent 72%)",
-            }}
-          />
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 hidden opacity-[0.38] dark:block"
-            style={{
-              backgroundImage: `
-            linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px)
-          `,
-              backgroundSize: "64px 64px",
-              maskImage:
-                "radial-gradient(ellipse 55% 55% at 50% 45%, black 28%, transparent 72%)",
-              WebkitMaskImage:
-                "radial-gradient(ellipse 55% 55% at 50% 45%, black 28%, transparent 72%)",
-            }}
-          />
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 dark:hidden"
-            style={{
-              background: `radial-gradient(ellipse 70% 50% at 20% 90%, color-mix(in oklab, ${ACCENT} 10%, #F5F4EF) 0%, transparent 55%)`,
-            }}
-          />
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 hidden dark:block"
-            style={{
-              background:
-                "radial-gradient(ellipse 70% 50% at 20% 90%, color-mix(in_oklab,oklch(0.86_0.22_142)_12%,transparent),transparent)",
-            }}
-          />
-
-          <div className={`relative ${MAX} ${PAD_X}`}>
-            <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(260px,20rem)] lg:gap-12 xl:gap-14">
-              <div className="min-w-0 max-w-[42rem]">
-                <div className="inline-flex max-w-full items-center gap-2 rounded-full border border-zinc-200/90 bg-white/80 px-3 py-1.5 shadow-[0_1px_0_rgba(11,11,10,0.03)] dark:border-white/15 dark:bg-zinc-900/55">
-                  <span
-                    className="size-1.5 shrink-0 rounded-full"
-                    style={{
-                      background: ACCENT,
-                      boxShadow: `0 0 0 3px color-mix(in oklab, ${ACCENT} 28%, transparent)`,
-                    }}
-                  />
-                  <span className="mono text-[11px] font-medium uppercase tracking-[0.07em] text-zinc-500 dark:text-zinc-400">
-                    Next step
-                  </span>
-                </div>
-
-                <h2 className="mt-6 text-balance text-[clamp(2rem,4.2vw,3.25rem)] font-semibold leading-[0.98] tracking-[-0.035em] text-zinc-950 dark:text-white">
-                  Your Website Should Grow With Your Business
-                </h2>
-
-                <p className="mt-6 text-pretty text-lg leading-[1.55] text-zinc-600 dark:text-zinc-400 sm:text-[19px]">
-                  Tell us what you’re running today — Shopify, WordPress,
-                  Squarespace, or a custom stack. We’ll reply with a clear read on
-                  support, updates, and what to fix first for Hong Kong operations.
-                </p>
-
-                <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-                  <BookAuditScrollCta
-                    conversion="website"
-                    href="#contact"
-                    className="inline-flex h-12 w-full items-center justify-center rounded-lg px-7 text-[15px] font-semibold transition hover:opacity-95 sm:h-[3.25rem] sm:w-auto sm:min-w-[240px]"
-                    style={{
-                      background: ACCENT,
-                      color: ACCENT_INK,
-                    }}
-                  >
-                    Book a Free Website Audit
-                  </BookAuditScrollCta>
-                  <Link
-                    href={MAIL_HELLO}
-                    className="mono inline-flex h-12 w-full items-center justify-center gap-2.5 rounded-lg border border-zinc-300/90 bg-white px-6 text-[13.5px] font-medium tracking-wide text-zinc-900 shadow-sm transition hover:border-zinc-400 sm:h-[3.25rem] sm:w-auto dark:border-white/18 dark:bg-transparent dark:text-zinc-100 dark:shadow-none dark:hover:border-white/28 dark:hover:bg-white/[0.05]"
-                  >
-                  hello@v1tov2.com
-                  <svg
-                    width="12"
-                    height="12"
-                    viewBox="0 0 12 12"
-                    fill="none"
-                    className="shrink-0 opacity-80"
-                    aria-hidden
-                  >
-                    <path
-                      d="M3 3h6v6M3 9l6-6"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                </Link>
-              </div>
-
-              <p className="mono mt-4 max-w-md text-[11px] leading-relaxed text-zinc-500">
-                Free audit by email · We review your setup, update backlog, and
-                realistic next steps before you commit.
+          <div className={MAX + " " + PAD_X}>
+            <div className="mx-auto max-w-6xl">
+              <h2 className="text-balance text-[clamp(1.625rem,2.8vw,2.25rem)] font-semibold leading-[1.1] tracking-[-0.025em] text-zinc-950 dark:text-zinc-50">
+                What we help with
+              </h2>
+              <p className="mt-3 max-w-4xl text-pretty text-[16px] leading-[1.55] text-zinc-600 dark:text-zinc-400 sm:mt-3.5 sm:text-[17px]">
+                We support businesses across website design, maintenance, revamps,
+                and long-term operational website support.
               </p>
 
-              <SiteContactStrip positioningLine="Operator-led website support · Hong Kong." />
-              </div>
+              <div className="relative mt-6 rounded-2xl border border-zinc-300/60 bg-[#F7F5EE]/95 p-5 shadow-[0_1px_0_rgba(11,11,10,0.04),0_18px_48px_-36px_rgba(11,11,10,0.12)] sm:mt-7 sm:p-7 dark:border-zinc-700/65 dark:bg-zinc-900/35 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-x-5 top-0 h-[2px] rounded-full sm:inset-x-7"
+                  style={{
+                    background: `linear-gradient(90deg, color-mix(in oklab, ${ACCENT} 55%, rgb(212 212 216)) 0%, color-mix(in oklab, ${ACCENT} 18%, rgb(228 228 231)) 42%, transparent 100%)`,
+                  }}
+                />
 
-              <WebsiteSupportSnapshotPanel />
+                <div className="relative mt-5 flex flex-col gap-10 sm:mt-6 lg:mt-7 lg:grid lg:grid-cols-[minmax(0,1.08fr)_minmax(300px,0.9fr)] lg:items-center lg:gap-9 xl:gap-11">
+                  <div className="flex min-w-0 flex-col gap-5 lg:max-w-none">
+                    {SERVICE_CARDS.map((item) => (
+                      <article
+                        key={item.title}
+                        className="group relative overflow-hidden rounded-xl border border-zinc-300/72 bg-[#FDFCF7] py-5 pl-5 pr-5 shadow-[0_1px_0_rgba(11,11,10,0.045)] transition-[border-color,box-shadow] duration-200 hover:border-zinc-400/80 hover:shadow-[0_8px_32px_-28px_rgba(11,11,10,0.12)] dark:border-zinc-700/72 dark:bg-zinc-950/55 dark:hover:border-zinc-600/85 sm:pl-6 sm:pr-6"
+                        style={{
+                          borderLeftWidth: 3,
+                          borderLeftColor: `color-mix(in oklab, ${ACCENT} 48%, rgb(200 200 208))`,
+                        }}
+                      >
+                        <span className="mono text-[10px] font-medium uppercase tracking-[0.09em] text-zinc-500 dark:text-zinc-500">
+                          {item.label}
+                        </span>
+                        <h3 className="mt-1.5 text-[18px] font-semibold leading-snug tracking-[-0.02em] text-zinc-950 group-hover:text-zinc-900 dark:text-zinc-50 dark:group-hover:text-zinc-50 sm:text-[20px]">
+                          {item.title}
+                        </h3>
+                        <p className="mt-2.5 text-pretty text-[15px] leading-relaxed text-zinc-600 dark:text-zinc-400">
+                          {item.body}
+                        </p>
+                      </article>
+                    ))}
+                  </div>
+
+                  <aside
+                    className="relative flex min-w-0 flex-col overflow-hidden rounded-xl border border-zinc-300/65 bg-[#FAF7EF] p-5 shadow-[0_1px_0_rgba(11,11,10,0.05)] ring-1 ring-zinc-200/45 dark:border-zinc-700/60 dark:bg-zinc-950/50 dark:ring-white/[0.05] sm:p-6"
+                    aria-labelledby="website-support-trust-heading"
+                  >
+                    <h3
+                      id="website-support-trust-heading"
+                      className="relative text-[17px] font-semibold tracking-[-0.02em] text-zinc-950 dark:text-zinc-50 sm:text-[18px]"
+                    >
+                      Websites built &amp; maintained
+                    </h3>
+                    <p className="relative mt-2.5 max-w-none text-pretty text-[13px] leading-[1.52] text-zinc-600 dark:text-zinc-400 sm:mt-3 sm:text-[14px] sm:leading-[1.53]">
+                      A selection of businesses and organizations we&apos;ve supported
+                      across website design, revamps, maintenance, and ecommerce
+                      updates.
+                    </p>
+                    <div className="relative mt-5 grid grid-cols-2 gap-3 sm:mt-6 sm:gap-3.5">
+                      {HERO_TRUST_LOGOS.map((mark) => (
+                        <div
+                          key={mark.src}
+                          className="flex min-h-[4.75rem] items-center justify-center rounded-lg border border-zinc-700/22 bg-gradient-to-b from-zinc-800/90 to-zinc-900/95 px-2 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.07)] transition-[border-color,background-color] duration-200 hover:border-zinc-500/35 hover:from-zinc-800 hover:to-zinc-900 dark:border-zinc-600/35 dark:from-zinc-900 dark:to-zinc-950 sm:min-h-[5.25rem] sm:px-2.5 sm:py-3.5 dark:hover:border-zinc-500/45"
+                        >
+                          <Image
+                            src={mark.src}
+                            alt={mark.alt}
+                            width={200}
+                            height={72}
+                            className="max-h-10 w-auto max-w-[94%] object-contain brightness-110 sm:max-h-11 sm:max-w-[96%]"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </aside>
+                </div>
+              </div>
             </div>
+          </div>
+        </section>
+
+        {/* Selected projects */}
+        <section
+          id="projects"
+          className="scroll-mt-24 border-t border-zinc-200/80 bg-[#FAFAF7] py-14 sm:py-20 lg:py-[5.25rem] dark:border-white/[0.07] dark:bg-zinc-950"
+        >
+          <div className={MAX + " " + PAD_X}>
+            <div className="mx-auto max-w-6xl">
+              <header className="max-w-3xl">
+                <h2 className="text-balance text-[clamp(1.5rem,3vw,2.125rem)] font-semibold tracking-[-0.025em] text-zinc-950 dark:text-zinc-50">
+                  We build websites around real operations
+                </h2>
+                <p className="mt-3 text-pretty text-[15px] leading-snug text-zinc-600 dark:text-zinc-400 sm:mt-3.5 sm:text-[16px] sm:leading-relaxed">
+                  From ecommerce storefronts to business websites, maintenance,
+                  and long-term operational support.
+                </p>
+              </header>
+
+              <div className="mt-10 grid grid-cols-1 items-stretch gap-6 sm:mt-11 sm:grid-cols-2 lg:gap-7">
+                {WEBSITE_PROJECTS.map((project) => (
+                  <article
+                    key={project.name}
+                    className={`${CARD} ${PROJECT_CARD_HOVER} flex h-full flex-col overflow-hidden`}
+                  >
+                    <div className="relative aspect-[16/10] w-full shrink-0 overflow-hidden border-b border-zinc-200/80 bg-zinc-100/70 dark:border-zinc-700/70 dark:bg-zinc-900/40">
+                      <Image
+                        src={project.screenshot}
+                        alt={project.screenshotAlt}
+                        fill
+                        className="object-cover object-top"
+                        sizes="(max-width: 640px) 100vw, 50vw"
+                      />
+                    </div>
+                    <div className="flex min-h-0 flex-1 flex-col gap-4 p-5 sm:p-6">
+                      <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+                        <Image
+                          src={project.logo}
+                          alt={`${project.name} logo`}
+                          width={160}
+                          height={48}
+                          className="h-8 w-auto max-w-[140px] object-contain object-left opacity-95 dark:opacity-95"
+                        />
+                        <div className="flex min-w-0 items-center gap-2">
+                          <span
+                            className="size-1 shrink-0 rounded-full"
+                            style={{
+                              background: ACCENT,
+                              boxShadow: `0 0 0 2px color-mix(in oklab, ${ACCENT} 20%, transparent)`,
+                            }}
+                            aria-hidden
+                          />
+                          <h3 className="min-w-0 text-[17px] font-semibold tracking-[-0.015em] text-zinc-950 dark:text-zinc-50 sm:text-[18px]">
+                            {project.name}
+                          </h3>
+                        </div>
+                      </div>
+                      <div className={PROJECT_PILL_ROW}>
+                        {project.tags.map((tag) => (
+                          <span key={tag} className={PROJECT_PILL}>
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      <p className="text-pretty text-[14px] leading-[1.52] text-zinc-600 dark:text-zinc-400 sm:text-[15px]">
+                        {project.description}
+                      </p>
+                      <a
+                        href={project.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`${projectLinkClass} mt-auto pt-0.5`}
+                      >
+                        View live site →
+                      </a>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Common problems — operational review panels */}
+        <section
+          className={`border-t border-zinc-200/80 bg-[#F5F4EF] py-14 sm:py-16 lg:py-20 dark:border-white/[0.07] dark:bg-zinc-950`}
+          aria-labelledby="website-issues-heading"
+        >
+          <div className={MAX + " " + PAD_X}>
+            <div className="mx-auto max-w-5xl">
+              <header className="mx-auto max-w-xl text-center lg:max-w-2xl">
+                <h2
+                  id="website-issues-heading"
+                  className="text-balance text-[clamp(1.5rem,3vw,2.125rem)] font-semibold tracking-[-0.025em] text-zinc-950 dark:text-zinc-50"
+                >
+                  Common website issues we help fix
+                </h2>
+                <p className="mt-3 text-pretty text-[15px] leading-[1.55] text-zinc-600 dark:text-zinc-400 sm:mt-4 sm:text-[16px] sm:leading-[1.58]">
+                  Common signs a business website is becoming harder to maintain,
+                  slower to update, or disconnected from day-to-day operations.
+                </p>
+              </header>
+
+              <div className="mt-10 flex flex-col gap-6 lg:mt-12 lg:grid lg:grid-cols-[minmax(0,1.22fr)_minmax(0,1fr)] lg:items-stretch lg:gap-7">
+                <IssueReviewPanel panel={WEBSITE_ISSUE_PANELS[0]} />
+                <div className="flex flex-col gap-6 lg:gap-7">
+                  <IssueReviewPanel panel={WEBSITE_ISSUE_PANELS[1]} />
+                  <IssueReviewPanel panel={WEBSITE_ISSUE_PANELS[2]} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* How we work */}
+        <section
+          className={`border-t border-zinc-200/80 bg-[#FAFAF7] py-14 sm:py-16 lg:py-20 dark:border-white/[0.07] dark:bg-zinc-950`}
+        >
+          <div className={MAX + " " + PAD_X}>
+            <div className="mx-auto max-w-3xl text-center lg:max-w-4xl">
+              <h2 className="text-balance text-[clamp(1.5rem,3vw,2.125rem)] font-semibold tracking-[-0.025em] text-zinc-950 dark:text-zinc-50">
+                How we approach website projects
+              </h2>
+              <p className="mx-auto mt-3 max-w-2xl text-pretty text-[15px] leading-snug text-zinc-600 dark:text-zinc-400 sm:mt-4 sm:text-[16px] sm:leading-relaxed">
+                Straightforward steps—review, plan, build, then keep the site
+                dependable as your business changes.
+              </p>
+            </div>
+
+            <ol className="mx-auto mt-8 grid max-w-6xl list-none grid-cols-1 gap-4 md:mt-9 md:grid-cols-2 md:gap-5">
+              {WEBSITE_APPROACH_STEPS.map((step, i) => (
+                <li key={step.title}>
+                  <article className={`${CARD} flex h-full flex-col p-4 sm:p-5`}>
+                    <div className="flex items-start gap-3.5 sm:gap-4">
+                      <span
+                        className="mono flex h-9 w-9 shrink-0 items-center justify-center rounded-full border bg-white text-[13px] font-bold text-zinc-900 dark:bg-zinc-900 dark:text-zinc-100"
+                        style={{
+                          borderColor: `color-mix(in oklab, ${ACCENT} 38%, rgb(212 212 216))`,
+                        }}
+                      >
+                        {i + 1}
+                      </span>
+                      <div className="min-w-0 flex-1">
+                        <h3 className="text-[16px] font-semibold tracking-[-0.015em] text-zinc-950 dark:text-zinc-50 sm:text-[17px]">
+                          {step.title}
+                        </h3>
+                        <p className="mt-1.5 text-pretty text-[14px] leading-[1.52] text-zinc-600 dark:text-zinc-400 sm:text-[15px] sm:leading-[1.52]">
+                          {step.body}
+                        </p>
+                      </div>
+                    </div>
+                    <p className="mt-3 flex flex-wrap items-baseline gap-x-1.5 gap-y-0.5 border-t border-zinc-200/80 pt-2.5 dark:border-zinc-700/70">
+                      <span
+                        className="mono text-[10px] font-medium uppercase tracking-[0.035em]"
+                        style={{
+                          color: `color-mix(in oklab, ${ACCENT_INK} 42%, rgb(113 113 122))`,
+                        }}
+                      >
+                        Output:
+                      </span>
+                      <span className="text-[15px] font-semibold tracking-[-0.012em] text-zinc-950 dark:text-zinc-50">
+                        {step.output}
+                      </span>
+                    </p>
+                  </article>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+
+        {/* Final CTA — aligns with /business-systems */}
+        <section
+          id="contact"
+          className="relative scroll-mt-24 overflow-hidden border-t border-zinc-300/45 bg-[#F1EEE6] py-12 shadow-[inset_0_1px_0_rgba(255,255,255,0.65)] sm:py-16 lg:py-[4.25rem] dark:border-zinc-700/55 dark:bg-zinc-900 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]"
+        >
+          <div className={`relative ${MAX} ${PAD_X}`}>
+            <div className="mx-auto max-w-[42rem] text-center">
+              <h2 className="text-balance text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold tracking-[-0.03em] text-zinc-950 dark:text-zinc-50">
+                Need a website that better supports your business?
+              </h2>
+              <p className="mt-4 text-pretty text-[17px] leading-[1.52] text-zinc-600 dark:text-zinc-400 sm:mt-5 sm:text-[18px] sm:leading-[1.55]">
+                We help businesses build, improve, and maintain practical websites
+                designed around real operational needs.
+              </p>
+            </div>
+
+            <div className="mx-auto mt-7 max-w-[min(100%,42rem)] md:mt-8 lg:mt-9 lg:max-w-[46.5rem]">
+              <div className="grid grid-cols-1 gap-8 border-t border-zinc-300/40 pt-8 dark:border-zinc-600/45 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] lg:items-start lg:gap-10 lg:gap-12 lg:pt-7 xl:gap-14">
+                <div className="text-left lg:pt-0.5">
+                  <p className="text-[22px] font-semibold tracking-[-0.025em] text-zinc-950 dark:text-zinc-50 sm:text-[24px]">
+                    Jeffrey Choi
+                  </p>
+                  <p className="mt-1.5 text-[13px] font-medium text-zinc-500 dark:text-zinc-400 sm:text-[13.5px]">
+                    Founder, V1toV2
+                  </p>
+                  <p className="mt-2 max-w-md text-pretty text-[12.5px] font-medium leading-snug text-zinc-700 dark:text-zinc-300 sm:text-[13px]">
+                    Founder-led website partner based in Hong Kong.
+                  </p>
+                  <p className="mt-3 max-w-md text-pretty text-[13px] leading-[1.52] text-zinc-600 dark:text-zinc-400 sm:text-[14px] sm:leading-[1.5]">
+                    Works with SMEs on business websites, ecommerce, and ongoing
+                    website maintenance and support—same practical approach we use on
+                    operational systems work.
+                  </p>
+                </div>
+
+                <div className="text-left">
+                  <div className="rounded-xl border border-zinc-300/65 bg-[#FAF8F2] px-4 py-4 shadow-[0_1px_0_rgba(11,11,10,0.035)] ring-1 ring-zinc-200/35 dark:border-zinc-600/65 dark:bg-zinc-800/35 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] dark:ring-white/[0.05] sm:px-5 sm:py-5">
+                    <p className="mono text-[11px] font-semibold uppercase tracking-[0.05em] text-zinc-600 dark:text-zinc-400">
+                      Reach Jeffrey directly
+                    </p>
+                    <a
+                      href="tel:+85292253889"
+                      className="mono mt-3 block min-h-[44px] py-1 text-[16px] font-semibold text-zinc-950 no-underline underline-offset-[3px] transition hover:underline hover:decoration-zinc-400 dark:text-zinc-50 dark:hover:decoration-zinc-500 sm:min-h-0 sm:text-[17px]"
+                    >
+                      {PHONE_DISPLAY}
+                    </a>
+                    <a
+                      href={MAIL_JEFFREY}
+                      className="mono mt-1 block min-h-[44px] break-words py-1 text-[16px] font-semibold text-zinc-950 underline decoration-zinc-300/85 underline-offset-[3px] transition hover:decoration-zinc-500 dark:text-zinc-50 dark:decoration-zinc-600 dark:hover:decoration-zinc-400 sm:min-h-0"
+                    >
+                      jeffrey@v1tov2.com
+                    </a>
+                    <div className="mt-5">
+                      <a
+                        href={WEBSITE_SUPPORT_CONSULTATION_MAILTO}
+                        className="inline-flex min-h-[48px] w-full items-center justify-center rounded-lg px-6 text-[15px] font-semibold transition hover:opacity-95 active:opacity-90"
+                        style={{
+                          background: ACCENT,
+                          color: ACCENT_INK,
+                        }}
+                      >
+                        Book a consultation
+                      </a>
+                    </div>
+                    <p className="mt-4 border-t border-zinc-300/35 pt-3 text-[10.5px] leading-snug text-zinc-400 dark:border-zinc-600/40 dark:text-zinc-500">
+                      <span className="text-zinc-400 dark:text-zinc-500">
+                        General inbox:{" "}
+                      </span>
+                      <Link
+                        href={MAIL_HELLO}
+                        className="mono text-zinc-400 underline decoration-zinc-300/55 underline-offset-2 transition hover:text-zinc-600 hover:decoration-zinc-400 dark:text-zinc-500 dark:decoration-zinc-600/70 dark:hover:text-zinc-300"
+                      >
+                        hello@v1tov2.com
+                      </Link>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <p className="mono mx-auto mt-7 max-w-[46.5rem] text-[12px] text-zinc-500 dark:text-zinc-500 lg:mt-6">
+              <Link
+                href="/"
+                className="text-zinc-600 underline-offset-2 transition hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200"
+              >
+                ← Back to V1toV2 home
+              </Link>
+            </p>
           </div>
         </section>
       </main>
