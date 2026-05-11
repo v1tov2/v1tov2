@@ -51,6 +51,9 @@ export function SiteFooter() {
               <Link href="/website-support" className={linkMuted}>
                 Website Support
               </Link>
+              <Link href="/business-systems" className={linkMuted}>
+                Business Systems
+              </Link>
               <Link href="/workflow-automation" className={linkMuted}>
                 Workflow Automation
               </Link>

@@ -43,11 +43,13 @@ function NavLink({
 function BookAuditNavCta() {
   const pathname = usePathname() || "/";
   const conversion =
-    pathname === "/"
+    pathname === "/" || pathname.startsWith("/business-systems")
       ? "v2"
       : pathname.startsWith("/website-support")
         ? "website"
-        : "workflow";
+        : pathname.startsWith("/workflow-automation")
+          ? "workflow"
+          : "v2";
 
   return (
     <BookAuditScrollCta
@@ -81,6 +83,7 @@ export function SiteNavbar() {
   const isHome = pathname === "/";
   const isWebsiteSupport = pathname.startsWith("/website-support");
   const isWorkflow = pathname.startsWith("/workflow-automation");
+  const isBusinessSystems = pathname.startsWith("/business-systems");
 
   return (
     <header className="sticky top-0 z-[100] border-b border-zinc-200/65 bg-[color-mix(in_srgb,var(--background)_92%,transparent)] backdrop-blur-md backdrop-saturate-150 dark:border-zinc-800/80 dark:bg-[color-mix(in_srgb,#0a0a0a_92%,transparent)]">
@@ -119,6 +122,9 @@ export function SiteNavbar() {
           {!isHome ? <NavLink href="/" active={false}>Home</NavLink> : null}
           <NavLink href="/website-support" active={isWebsiteSupport}>
             Website Support
+          </NavLink>
+          <NavLink href="/business-systems" active={isBusinessSystems}>
+            Business Systems
           </NavLink>
           <NavLink href="/workflow-automation" active={isWorkflow}>
             Workflow Automation
@@ -202,6 +208,17 @@ export function SiteNavbar() {
             onClick={() => setMenuOpen(false)}
           >
             Website Support
+          </Link>
+          <Link
+            href="/business-systems"
+            className={`rounded-lg px-3 py-3.5 text-[15px] font-medium transition hover:bg-zinc-100/90 dark:hover:bg-white/[0.06] ${
+              isBusinessSystems
+                ? "bg-[color-mix(in_oklab,oklch(0.86_0.22_142)_12%,#fff)] text-zinc-900 dark:bg-white/[0.08] dark:text-zinc-50"
+                : "text-zinc-800 dark:text-zinc-200"
+            }`}
+            onClick={() => setMenuOpen(false)}
+          >
+            Business Systems
           </Link>
           <Link
             href="/workflow-automation"
