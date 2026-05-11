@@ -281,7 +281,7 @@ function IssueReviewPanel({
   );
 }
 
-/** Three previews — stacked on mobile, layered from lg up */
+/** Three previews — hidden below `md`; layered from `lg` up */
 function HeroWebsiteCollage() {
   const frame =
     "overflow-hidden rounded-xl border border-zinc-200/95 bg-white shadow-[0_16px_48px_-26px_rgba(11,11,10,0.2)] ring-1 ring-zinc-900/[0.05] dark:border-zinc-600/55 dark:bg-zinc-900 dark:shadow-[0_24px_56px_-30px_rgba(0,0,0,0.48)] dark:ring-white/[0.06]";
@@ -344,7 +344,7 @@ export default function WebsiteSupportPage() {
           aria-labelledby="website-support-hero-heading"
         >
           <div
-            className={`relative ${MAX} ${PAD_X} pb-12 pt-10 sm:pb-14 sm:pt-12 md:pb-16 md:pt-14 lg:pb-16 lg:pt-14 xl:pb-[4.5rem] xl:pt-[4.25rem]`}
+            className={`relative ${MAX} ${PAD_X} pb-10 pt-10 sm:pb-14 sm:pt-12 md:pb-16 md:pt-14 lg:pb-16 lg:pt-14 xl:pb-[4.5rem] xl:pt-[4.25rem]`}
           >
             <div className="lg:grid lg:grid-cols-[minmax(0,1.06fr)_minmax(0,0.94fr)] lg:items-center lg:gap-12 xl:gap-16">
             <div className="max-w-xl text-left">
@@ -364,7 +364,7 @@ export default function WebsiteSupportPage() {
                 ongoing maintenance support, we build practical websites designed
                 around real business needs.
               </p>
-              <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center lg:mt-10">
+              <div className="mt-8 flex flex-col gap-3 sm:mt-9 sm:flex-row sm:flex-wrap sm:items-center lg:mt-10">
                 <BookAuditScrollCta
                   conversion="website"
                   href="#contact"
@@ -385,7 +385,7 @@ export default function WebsiteSupportPage() {
               </div>
             </div>
 
-            <div className="mt-10 w-full overflow-x-clip sm:mt-11 lg:mt-0">
+            <div className="hidden w-full overflow-x-clip md:mt-10 md:block lg:mt-0">
               <HeroWebsiteCollage />
             </div>
             </div>
