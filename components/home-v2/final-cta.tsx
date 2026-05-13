@@ -1,45 +1,26 @@
-import Link from "next/link";
-import { V2AuditBookCtaLink } from "./v2-audit-book-cta-link";
+import { ContactForm } from "@/components/contact/ContactForm";
+import {
+  ACCENT,
+  ACCENT_INK,
+  MAIL_JEFFREY,
+  PHONE_DISPLAY,
+  SITE_MAX,
+  SITE_PAD_X,
+  WHATSAPP_URL,
+} from "@/components/shared/site-tokens";
 
-const ACCENT = "oklch(0.86 0.22 142)";
-const ACCENT_INK = "oklch(0.32 0.12 142)";
-
-const SNAPSHOT_SECTIONS = [
-  {
-    title: "Pain points identified",
-    items: [
-      "Orders scattered across chat, email, and sheets",
-      "No clear owner for each task",
-      "Status updates require manual chasing",
-    ],
-  },
-  {
-    title: "Highest-leverage fixes",
-    items: [
-      "Central intake + workflow states",
-      "Auto task assignment + visibility",
-      "Payment/status tracking in one place",
-    ],
-  },
-  {
-    title: "Expected impact",
-    items: [
-      "Fewer manual follow-ups",
-      "Faster turnaround",
-      "Clearer ownership across the team",
-    ],
-  },
+const TYPICAL_V2_LINES = [
+  "Fewer manual follow-ups",
+  "Clearer operational visibility",
+  "Less spreadsheet/WhatsApp chaos",
+  "Faster response workflows",
 ] as const;
-
-const MAIL_GENERAL = "mailto:hello@v1tov2.com";
-const MAIL_JEFFREY = "mailto:jeffrey@v1tov2.com";
-const WHATSAPP_URL = "https://wa.me/85292253889";
 
 export function FinalCta() {
   return (
     <section
       id="contact"
-      className="relative scroll-mt-24 overflow-hidden border-t border-white/10 bg-zinc-950 py-20 text-zinc-50 sm:py-24 lg:py-28 dark:border-white/10"
+      className="relative scroll-mt-24 overflow-hidden border-t border-white/10 bg-zinc-950 pt-20 pb-32 text-zinc-50 sm:pt-24 sm:pb-36 lg:pt-28 lg:pb-40 dark:border-white/10"
     >
       <div
         aria-hidden
@@ -61,175 +42,81 @@ export function FinalCta() {
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_20%_90%,color-mix(in_oklab,oklch(0.86_0.22_142)_12%,transparent),transparent)]"
       />
 
-      <div className="relative mx-auto max-w-[1200px] px-5 sm:px-6 md:px-8">
-        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-[1.18fr_1fr] lg:gap-16 xl:gap-20">
-          <div className="min-w-0">
-            <div className="inline-flex max-w-full items-center gap-2 rounded-full border border-white/15 px-3 py-1.5">
-              <span
-                className="size-1.5 shrink-0 rounded-full"
-                style={{
-                  background: ACCENT,
-                  boxShadow: `0 0 0 3px color-mix(in oklab, ${ACCENT} 28%, transparent)`,
-                }}
-              />
-              <span className="mono text-[11px] font-medium uppercase tracking-[0.07em] text-zinc-400">
-                Now booking · limited build slots available
-              </span>
-            </div>
-
-            <h2 className="mt-6 max-w-[20ch] text-balance text-[clamp(2.25rem,5.2vw,5rem)] font-semibold leading-[0.98] tracking-[-0.035em] text-white sm:max-w-none">
+      <div className={`relative ${SITE_MAX} ${SITE_PAD_X}`}>
+        <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-2 lg:gap-9 xl:gap-10">
+          <div className="min-w-0 max-w-xl lg:max-w-none">
+            <h2 className="max-w-[18ch] text-balance text-[clamp(2.1rem,4.8vw,3.75rem)] font-semibold leading-[0.98] tracking-[-0.035em] text-white sm:max-w-none">
               Ready for your V2?
             </h2>
 
-            <p className="mt-6 max-w-[32rem] text-pretty text-lg leading-[1.55] text-zinc-400 sm:text-[19px]">
-              Free 30-min call. We’ll walk through how your business runs today
-              and where a steadier operating system would pay back fastest.
-              Priorities first, fluff never. No pitch, no obligation.
+            <p className="mt-4 max-w-[36rem] text-pretty text-[17px] leading-[1.55] text-zinc-400 sm:mt-5 sm:text-[18px]">
+              Tell us what you&apos;re trying to improve. We&apos;ll reply with practical
+              next steps — usually within one business day.
             </p>
 
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-              <V2AuditBookCtaLink
-                href="#contact"
-                className="inline-flex h-12 items-center justify-center rounded-lg px-7 text-[15px] font-semibold transition hover:opacity-95 sm:h-[3.25rem] sm:min-w-[220px]"
-                style={{
-                  background: ACCENT,
-                  color: ACCENT_INK,
-                }}
-              >
-                Book a free V2 Audit
-              </V2AuditBookCtaLink>
-              <Link
-                href={MAIL_GENERAL}
-                className="mono inline-flex h-12 items-center justify-center gap-2.5 rounded-lg border border-white/20 px-6 text-[13.5px] font-medium tracking-wide text-zinc-100 transition hover:border-white/30 hover:bg-white/5 sm:h-[3.25rem]"
-              >
-                hello@v1tov2.com
-                <svg
-                  width="12"
-                  height="12"
-                  viewBox="0 0 12 12"
-                  fill="none"
-                  className="shrink-0 opacity-80"
-                  aria-hidden
-                >
-                  <path
-                    d="M3 3h6v6M3 9l6-6"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                  />
-                </svg>
-              </Link>
-            </div>
-
-            <div className="mt-5 max-w-[32rem] border-t border-white/10 pt-4 sm:mt-6 sm:pt-5 max-md:pb-0">
-              <p className="mb-0 text-[13px] leading-snug text-zinc-500 md:mb-3">
-                Operator-led systems partner based in Hong Kong.
+            <div className="mt-7 border-t border-white/10 pt-7 sm:mt-7 sm:pt-7">
+              <p className="text-[20px] font-semibold tracking-[-0.02em] text-white sm:text-[21px]">
+                Jeffrey Choi
               </p>
-
-              <div className="mt-3 md:hidden">
-                <div className="rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3">
-                  <div className="divide-y divide-white/10">
-                    <p className="py-2 text-[13px] font-semibold leading-snug text-white">
-                      Jeffrey Choi
-                    </p>
-                    <a
-                      href={WHATSAPP_URL}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mono block py-2 text-[13px] leading-snug text-zinc-200 underline decoration-white/20 underline-offset-2 transition hover:text-white hover:decoration-white/45"
-                    >
-                      +852 9225 3889
-                    </a>
-                    <a
-                      href={MAIL_JEFFREY}
-                      className="mono block break-words py-2 text-[13px] leading-snug text-zinc-200 underline decoration-white/20 underline-offset-2 transition hover:text-white hover:decoration-white/45"
-                    >
-                      jeffrey@v1tov2.com
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-              <div className="hidden grid-cols-3 gap-x-5 gap-y-0 items-baseline md:grid lg:gap-x-8">
-                <p className="text-[13.5px] font-medium leading-snug text-zinc-100">
-                  Jeffrey Choi
-                </p>
+              <a
+                href="tel:+85292253889"
+                className="mono mt-3 block min-h-[44px] py-0.5 text-[16px] font-semibold text-zinc-100 no-underline underline-offset-[3px] transition hover:underline hover:decoration-zinc-500 sm:min-h-0 sm:text-[17px]"
+              >
+                {PHONE_DISPLAY}
+              </a>
+              <a
+                href={MAIL_JEFFREY}
+                className="mono mt-1 block min-h-[44px] break-words py-0.5 text-[16px] font-semibold text-zinc-100 underline decoration-white/25 underline-offset-[3px] transition hover:decoration-zinc-400 sm:min-h-0"
+              >
+                jeffrey@v1tov2.com
+              </a>
+              <div className="mt-4 max-w-xs sm:mt-5">
                 <a
                   href={WHATSAPP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mono block text-[13px] leading-snug text-zinc-200 underline decoration-white/20 underline-offset-4 transition hover:text-white hover:decoration-white/45"
-                >
-                  +852 9225 3889
-                </a>
-                <a
-                  href={MAIL_JEFFREY}
-                  className="mono block break-all text-[13px] leading-snug text-zinc-200 underline decoration-white/20 underline-offset-4 transition hover:text-white hover:decoration-white/45"
-                >
-                  jeffrey@v1tov2.com
-                </a>
-              </div>
-            </div>
-
-            <p className="mono mt-4 text-[11px] tracking-[0.06em] text-zinc-500 md:mt-6">
-              30 minutes · founder-led · no obligation
-            </p>
-          </div>
-
-          <aside className="min-w-0 rounded-[12px] border border-white/12 bg-zinc-900/40 backdrop-blur-[10px] lg:min-h-[min(100%,420px)]">
-            <div className="border-b border-white/10 px-5 py-4 sm:px-6 sm:py-5">
-              <div className="flex flex-wrap items-start justify-between gap-3">
-                <div className="min-w-0">
-                  <h3 className="text-base font-semibold tracking-tight text-white sm:text-[17px]">
-                    V2 Audit snapshot
-                  </h3>
-                  <p className="mono mt-2 max-w-prose text-[11px] leading-relaxed text-zinc-500 sm:text-xs">
-                    An example of what we’ll map in the first call.
-                  </p>
-                </div>
-                <span
-                  className="mono shrink-0 rounded border border-white/10 bg-white/[0.06] px-2 py-0.5 text-[9.5px] font-medium uppercase tracking-[0.08em] text-zinc-400"
+                  className="inline-flex min-h-[48px] w-full items-center justify-center rounded-lg px-5 text-[15px] font-semibold transition hover:opacity-95 active:opacity-90"
                   style={{
-                    borderColor: `color-mix(in oklab, ${ACCENT} 35%, rgba(255,255,255,0.12))`,
+                    background: ACCENT,
+                    color: ACCENT_INK,
                   }}
                 >
-                  Preview
-                </span>
+                  Chat on WhatsApp
+                </a>
               </div>
             </div>
 
-            <div className="divide-y divide-white/10 px-5 py-1 sm:px-6">
-              {SNAPSHOT_SECTIONS.map((section) => (
-                <div
-                  key={section.title}
-                  className="py-4 first:pt-3.5 last:pb-5"
-                >
-                  <p className="mono mb-3 flex items-center gap-2 text-[10.5px] font-medium uppercase tracking-[0.07em] text-zinc-500">
+            <div className="mt-6 rounded-xl border border-white/[0.1] bg-zinc-900/45 px-4 py-3.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] ring-1 ring-white/[0.05] backdrop-blur-[10px] sm:mt-7 sm:px-5 sm:py-4">
+              <p className="mono text-[10px] font-semibold uppercase tracking-[0.1em] text-zinc-500">
+                Typical V2 improvements
+              </p>
+              <ul className="mt-2.5 space-y-2 sm:mt-3 sm:space-y-2.5">
+                {TYPICAL_V2_LINES.map((line) => (
+                  <li
+                    key={line}
+                    className="flex gap-2.5 text-[13px] leading-snug text-zinc-300 sm:text-[13.5px] sm:leading-relaxed"
+                  >
                     <span
-                      className="size-1.5 shrink-0 rounded-full"
+                      className="mt-[0.45rem] size-1 shrink-0 rounded-full opacity-95"
                       style={{ background: ACCENT }}
+                      aria-hidden
                     />
-                    {section.title}
-                  </p>
-                  <ul className="space-y-2.5 border-l border-white/10 pl-3 sm:pl-3.5">
-                    {section.items.map((line) => (
-                      <li
-                        key={line}
-                        className="relative pl-3 text-[13px] leading-snug text-zinc-300"
-                      >
-                        <span
-                          className="absolute left-0 top-[0.5rem] size-1 rounded-full opacity-80"
-                          style={{ background: ACCENT }}
-                          aria-hidden
-                        />
-                        {line}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
+                    {line}
+                  </li>
+                ))}
+              </ul>
             </div>
-          </aside>
+          </div>
+
+          <div className="min-w-0 w-full lg:self-stretch">
+            <ContactForm
+              sourcePage="/"
+              defaultServiceInterest="Not sure yet"
+              surface="dark-hero"
+              showWhatsappSecondary={false}
+              className="w-full max-w-xl lg:max-w-none"
+            />
+          </div>
         </div>
       </div>
     </section>

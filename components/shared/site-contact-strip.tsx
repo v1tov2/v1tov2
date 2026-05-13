@@ -1,4 +1,3 @@
-import Link from "next/link";
 import {
   MAIL_JEFFREY,
   PHONE_DISPLAY,
@@ -60,15 +59,6 @@ export function SiteContactStrip({ positioningLine }: SiteContactStripProps) {
           jeffrey@v1tov2.com
         </a>
       </div>
-
-      <p className="mono mt-8 text-[12px] text-zinc-500 dark:text-zinc-600">
-        <Link
-          href="/"
-          className="text-zinc-600 underline-offset-2 transition hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-zinc-300"
-        >
-          ← Back to V1toV2 home
-        </Link>
-      </p>
     </div>
   );
 }

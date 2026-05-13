@@ -6,7 +6,7 @@ const ACCENT_INK = "oklch(0.32 0.12 142)";
 const BUILD = {
   name: "V2 Build",
   tag: "Most teams start here",
-  price: "from HKD 18,000",
+  price: "from HKD 10,000",
   pitch: "Focused system build",
   duration: "Typically 2–8 weeks",
   summary:
@@ -25,7 +25,7 @@ const BUILD = {
 const OPERATE = {
   name: "V2 Operate",
   tag: "Ongoing systems partner",
-  price: "from HKD 3,000/month",
+  price: "from HKD 1,000/month",
   duration: "Rolling",
   summary:
     "Your fractional systems team after launch. We tighten what breaks first, ship the next workflow, and keep the stack sane as you scale.",

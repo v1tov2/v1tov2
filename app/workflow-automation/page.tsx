@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import type { ReactNode } from "react";
+import { ContactForm } from "@/components/contact/ContactForm";
+import { FounderContactPanel } from "@/components/contact/founder-contact-panel";
 import { SiteNavbar } from "@/components/shared/navbar";
 import { BookAuditScrollCta } from "@/components/shared/book-audit-scroll-cta";
-import { SiteContactStrip } from "@/components/shared/site-contact-strip";
 import {
   ACCENT,
   ACCENT_INK,
-  MAIL_HELLO,
   SITE_MAX,
   SITE_PAD_X,
 } from "@/components/shared/site-tokens";
@@ -159,108 +158,6 @@ const CREDIBILITY_CARDS = [
     body: "Tools that help teams see what needs attention.",
   },
 ] as const;
-
-const WORKFLOW_SNAPSHOT_ROWS = [
-  { a: "Intake form", b: "Task created" },
-  { a: "Payment check", b: "Approval step" },
-  { a: "Customer update", b: "Automated email" },
-  { a: "Dashboard", b: "Manager visibility" },
-  { a: "Pending items", b: "Assigned owner" },
-] as const;
-
-function snapshotRowDot() {
-  return {
-    background: ACCENT,
-    boxShadow: `0 0 0 3px color-mix(in oklab, ${ACCENT} 28%, transparent)`,
-  };
-}
-
-function WorkflowSnapshotPanel() {
-  return (
-    <aside
-      className={`relative min-w-0 overflow-hidden ${CARD_ELEVATED} backdrop-blur-[8px] lg:sticky lg:top-28`}
-      aria-labelledby="workflow-snapshot-heading"
-    >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -right-10 top-0 h-32 w-32 rounded-full opacity-35 blur-2xl dark:opacity-45"
-        style={{
-          background: `radial-gradient(circle, color-mix(in oklab, ${ACCENT} 22%, white) 0%, transparent 70%)`,
-        }}
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.38] dark:opacity-[0.26]"
-        style={{
-          backgroundImage: `
-            linear-gradient(to right, rgba(11,11,10,0.04) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(11,11,10,0.04) 1px, transparent 1px)
-          `,
-          backgroundSize: "28px 28px",
-          maskImage:
-            "radial-gradient(ellipse 95% 85% at 50% 0%, black 15%, transparent 75%)",
-          WebkitMaskImage:
-            "radial-gradient(ellipse 95% 85% at 50% 0%, black 15%, transparent 75%)",
-        }}
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 hidden opacity-25 dark:block"
-        style={{
-          backgroundImage: `
-            linear-gradient(to right, rgba(255,255,255,0.035) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(255,255,255,0.035) 1px, transparent 1px)
-          `,
-          backgroundSize: "28px 28px",
-          maskImage:
-            "radial-gradient(ellipse 95% 85% at 50% 0%, black 15%, transparent 75%)",
-          WebkitMaskImage:
-            "radial-gradient(ellipse 95% 85% at 50% 0%, black 15%, transparent 75%)",
-        }}
-      />
-
-      <div className="relative border-b border-zinc-200/85 px-4 py-3 dark:border-white/10 sm:px-5 sm:py-3.5">
-        <h3
-          id="workflow-snapshot-heading"
-          className="text-[14px] font-semibold tracking-tight text-zinc-950 dark:text-white sm:text-[15px]"
-        >
-          Workflow Snapshot
-        </h3>
-        <p className="mono mt-1 text-[10.5px] leading-relaxed text-zinc-500 sm:text-[11px]">
-          One path — from intake to visibility.
-        </p>
-      </div>
-
-      <ul className="relative divide-y divide-zinc-200/75 px-2 py-1 dark:divide-white/[0.08] sm:px-3">
-        {WORKFLOW_SNAPSHOT_ROWS.map((row) => (
-          <li
-            key={row.a}
-            className="flex items-center gap-2.5 px-2 py-2.5 sm:gap-3 sm:py-3"
-          >
-            <span
-              className="mt-0.5 size-1.25 shrink-0 rounded-full"
-              style={snapshotRowDot()}
-              aria-hidden
-            />
-            <div className="mono flex min-w-0 flex-1 flex-wrap items-baseline gap-x-1 gap-y-0.5 text-[11px] leading-snug sm:text-[12px]">
-              <span className="font-medium text-zinc-800 dark:text-zinc-200">{row.a}</span>
-              <span className="text-zinc-400 dark:text-zinc-500" aria-hidden>
-                →
-              </span>
-              <span className="text-zinc-600 dark:text-zinc-400">{row.b}</span>
-            </div>
-            <span
-              className="mono hidden shrink-0 rounded border border-zinc-200/80 bg-white/80 px-1.5 py-0.5 text-[9px] font-medium uppercase tracking-wider text-zinc-500 sm:inline dark:border-white/10 dark:bg-white/[0.04] dark:text-zinc-400"
-              aria-hidden
-            >
-              OK
-            </span>
-          </li>
-        ))}
-      </ul>
-    </aside>
-  );
-}
 
 function SectionEyebrow({ children }: { children: string }) {
   return (
@@ -496,7 +393,7 @@ export default function WorkflowAutomationPage() {
                   </a>
                 </div>
                 <p className="mono mt-4 text-center text-[11px] tracking-wide text-zinc-500 sm:text-left">
-                  Email hello@v1tov2.com · Subject: Free Workflow Audit
+                  Use the contact form below · mention &quot;Free Workflow Audit&quot; in your message
                 </p>
               </div>
 
@@ -923,7 +820,7 @@ export default function WorkflowAutomationPage() {
 
         <section
           id="contact"
-          className="relative scroll-mt-24 overflow-hidden border-t border-zinc-200/80 bg-[#F5F4EF] py-20 sm:py-24 lg:py-28 dark:border-white/10 dark:bg-zinc-950"
+          className="relative scroll-mt-24 overflow-hidden border-t border-zinc-200/80 bg-[#F5F4EF] pt-12 pb-14 sm:pt-14 sm:pb-16 lg:pt-[3.75rem] lg:pb-[4.5rem] dark:border-white/10 dark:bg-zinc-950"
         >
           <div
             aria-hidden
@@ -972,75 +869,35 @@ export default function WorkflowAutomationPage() {
           />
 
           <div className={`relative ${MAX} ${PAD_X}`}>
-            <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(280px,22rem)] lg:gap-12 xl:gap-14">
-              <div className="min-w-0 max-w-[42rem] lg:max-w-none">
-              <div className="inline-flex max-w-full items-center gap-2 rounded-full border border-zinc-200/90 bg-white/80 px-3 py-1.5 shadow-[0_1px_0_rgba(11,11,10,0.03)] dark:border-white/15 dark:bg-zinc-900/55">
-                <span
-                  className="size-1.5 shrink-0 rounded-full"
-                  style={{
-                    background: ACCENT,
-                    boxShadow: `0 0 0 3px color-mix(in oklab, ${ACCENT} 28%, transparent)`,
-                  }}
+            <div className="grid grid-cols-1 items-start gap-7 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] lg:gap-8 lg:items-start xl:gap-10">
+              <div className="min-w-0 max-w-xl lg:max-w-none">
+                <h2 className="text-balance text-[clamp(1.65rem,3.5vw,2.65rem)] font-semibold leading-[1.02] tracking-[-0.03em] text-zinc-950 dark:text-white">
+                  Stop Running the Business From Scattered Tabs
+                </h2>
+                <p className="mt-4 max-w-[36rem] text-pretty text-[15px] leading-[1.55] text-zinc-600 dark:text-zinc-400 sm:text-[16px] sm:leading-relaxed">
+                  If your team is still chasing updates across spreadsheets, chats,
+                  and manual processes, tell us what you&apos;re running today — we&apos;ll
+                  reply with practical next steps.
+                </p>
+
+                <div className="mt-7 lg:mt-8">
+                  <FounderContactPanel showWhatsappButton={false}>
+                    <p className="mt-2 max-w-md text-pretty text-[13px] leading-[1.52] text-zinc-600 dark:text-zinc-400 sm:text-[14px]">
+                      Operator-led workflow systems in Hong Kong — ecommerce, logistics,
+                      payments, and internal dashboards; not automation for its own sake.
+                    </p>
+                  </FounderContactPanel>
+                </div>
+              </div>
+
+              <div className="min-w-0 w-full">
+                <ContactForm
+                  sourcePage="/workflow-automation"
+                  defaultServiceInterest="Business systems / workflow automation"
+                  compact
+                  showWhatsappSecondary
                 />
-                <span className="mono text-[11px] font-medium uppercase tracking-[0.07em] text-zinc-500 dark:text-zinc-400">
-                  Next step
-                </span>
               </div>
-
-              <h2 className="mt-6 text-balance text-[clamp(2rem,4.2vw,3.25rem)] font-semibold leading-[0.98] tracking-[-0.035em] text-zinc-950 dark:text-white">
-                Stop Running the Business From Scattered Tabs
-              </h2>
-
-              <p className="mt-6 text-pretty text-lg leading-[1.55] text-zinc-600 dark:text-zinc-400 sm:text-[19px]">
-                If your team is still chasing updates across spreadsheets, chats, and
-                manual processes, let&apos;s identify the first workflow worth turning into a
-                better system.
-              </p>
-
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-                <BookAuditScrollCta
-                  conversion="workflow"
-                  href="#contact"
-                  className="inline-flex h-12 w-full items-center justify-center rounded-lg px-7 text-[15px] font-semibold transition hover:opacity-95 sm:h-[3.25rem] sm:w-auto sm:min-w-[240px]"
-                  style={{
-                    background: ACCENT,
-                    color: ACCENT_INK,
-                  }}
-                >
-                  Book a Free Workflow Audit
-                </BookAuditScrollCta>
-                <Link
-                  href={MAIL_HELLO}
-                  className="mono inline-flex h-12 w-full items-center justify-center gap-2.5 rounded-lg border border-zinc-300/90 bg-white px-6 text-[13.5px] font-medium tracking-wide text-zinc-900 shadow-sm transition hover:border-zinc-400 sm:h-[3.25rem] sm:w-auto dark:border-white/18 dark:bg-transparent dark:text-zinc-100 dark:shadow-none dark:hover:border-white/28 dark:hover:bg-white/[0.05]"
-                >
-                  hello@v1tov2.com
-                  <svg
-                    width="12"
-                    height="12"
-                    viewBox="0 0 12 12"
-                    fill="none"
-                    className="shrink-0 opacity-80"
-                    aria-hidden
-                  >
-                    <path
-                      d="M3 3h6v6M3 9l6-6"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                </Link>
-              </div>
-
-              <p className="mono mt-4 max-w-md text-[11px] leading-relaxed text-zinc-500">
-                Free workflow audit by email · We reply with realistic next steps for HK
-                operations.
-              </p>
-
-              <SiteContactStrip positioningLine="Operator-led workflow systems · Hong Kong." />
-              </div>
-
-              <WorkflowSnapshotPanel />
             </div>
           </div>
         </section>

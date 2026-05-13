@@ -1,15 +1,13 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import type { ReactNode } from "react";
+import { ContactForm } from "@/components/contact/ContactForm";
+import { FounderContactPanel } from "@/components/contact/founder-contact-panel";
 import { SiteNavbar } from "@/components/shared/navbar";
 import { BookAuditScrollCta } from "@/components/shared/book-audit-scroll-cta";
 import {
   ACCENT,
   ACCENT_INK,
-  MAIL_HELLO,
-  MAIL_JEFFREY,
-  PHONE_DISPLAY,
   SITE_MAX,
   SITE_PAD_X,
 } from "@/components/shared/site-tokens";
@@ -18,11 +16,6 @@ const MAX = SITE_MAX;
 const PAD_X = SITE_PAD_X;
 
 const SOURCEXPRESS_URL = "https://sourcexpress.asia";
-
-/** Final CTA — opens email with a clear subject for business-systems inquiries. */
-const BUSINESS_SYSTEMS_CONSULTATION_MAILTO =
-  "mailto:jeffrey@v1tov2.com?subject=" +
-  encodeURIComponent("Business systems consultation");
 
 const CARD =
   "rounded-xl border border-zinc-300/75 bg-[#FDFCF7] shadow-[0_1px_0_rgba(11,11,10,0.04)] dark:border-zinc-700/85 dark:bg-zinc-950/60 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]";
@@ -720,7 +713,7 @@ export default function BusinessSystemsPage() {
         {/* Final CTA */}
         <section
           id="contact"
-          className="relative scroll-mt-24 overflow-hidden border-t border-zinc-300/45 bg-[#F1EEE6] py-12 shadow-[inset_0_1px_0_rgba(255,255,255,0.65)] sm:py-16 lg:py-[4.25rem] dark:border-zinc-700/55 dark:bg-zinc-900 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]"
+          className="relative scroll-mt-24 overflow-hidden border-t border-zinc-300/45 bg-[#F1EEE6] pt-12 pb-14 shadow-[inset_0_1px_0_rgba(255,255,255,0.65)] sm:pt-16 sm:pb-[4.75rem] lg:pt-[4.25rem] lg:pb-[5.5rem] dark:border-zinc-700/55 dark:bg-zinc-900 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]"
         >
           <div className={`relative ${MAX} ${PAD_X}`}>
             <div className="mx-auto max-w-[42rem] text-center">
@@ -735,78 +728,22 @@ export default function BusinessSystemsPage() {
               </p>
             </div>
 
-            <div className="mx-auto mt-7 max-w-[min(100%,42rem)] md:mt-8 lg:mt-9 lg:max-w-[46.5rem]">
-              <div className="grid grid-cols-1 gap-8 border-t border-zinc-300/40 pt-8 dark:border-zinc-600/45 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] lg:items-start lg:gap-10 lg:gap-12 lg:pt-7 xl:gap-14">
-                <div className="text-left lg:pt-0.5">
-                  <p className="text-[22px] font-semibold tracking-[-0.025em] text-zinc-950 dark:text-zinc-50 sm:text-[24px]">
-                    Jeffrey Choi
+            <div className="mx-auto mt-6 max-w-5xl md:mt-7 lg:mt-8">
+              <div className="grid grid-cols-1 gap-6 border-t border-zinc-300/40 pt-6 dark:border-zinc-600/45 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] lg:items-start lg:gap-8 lg:pt-6 xl:gap-9">
+                <FounderContactPanel showWhatsappButton={false}>
+                  <p className="mt-2 max-w-md text-pretty text-[13px] leading-[1.52] text-zinc-600 dark:text-zinc-400 sm:text-[14px]">
+                    Founder-led systems partner in Hong Kong — logistics, sourcing,
+                    customer workflows, and cross-border operations with the Philippines.
                   </p>
-                  <p className="mt-1.5 text-[13px] font-medium text-zinc-500 dark:text-zinc-400 sm:text-[13.5px]">
-                    Founder, V1toV2
-                  </p>
-                  <p className="mt-2 max-w-md text-pretty text-[12.5px] font-medium leading-snug text-zinc-700 dark:text-zinc-300 sm:text-[13px]">
-                    Founder-led systems partner based in Hong Kong.
-                  </p>
-                  <p className="mt-3 max-w-md text-pretty text-[13px] leading-[1.52] text-zinc-600 dark:text-zinc-400 sm:text-[14px] sm:leading-[1.5]">
-                    Built operational systems for logistics, sourcing, customer
-                    workflows, and cross-border operations between Hong Kong and the
-                    Philippines.
-                  </p>
-                </div>
+                </FounderContactPanel>
 
-                <div className="text-left">
-                  <div className="rounded-xl border border-zinc-300/65 bg-[#FAF8F2] px-4 py-4 shadow-[0_1px_0_rgba(11,11,10,0.035)] ring-1 ring-zinc-200/35 dark:border-zinc-600/65 dark:bg-zinc-800/35 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] dark:ring-white/[0.05] sm:px-5 sm:py-5">
-                    <p className="mono text-[11px] font-semibold uppercase tracking-[0.05em] text-zinc-600 dark:text-zinc-400">
-                      Reach Jeffrey directly
-                    </p>
-                    <a
-                      href="tel:+85292253889"
-                      className="mono mt-3 block min-h-[44px] py-1 text-[16px] font-semibold text-zinc-950 no-underline underline-offset-[3px] transition hover:underline hover:decoration-zinc-400 dark:text-zinc-50 dark:hover:decoration-zinc-500 sm:min-h-0 sm:text-[17px]"
-                    >
-                      {PHONE_DISPLAY}
-                    </a>
-                    <a
-                      href={MAIL_JEFFREY}
-                      className="mono mt-1 block min-h-[44px] break-words py-1 text-[16px] font-semibold text-zinc-950 underline decoration-zinc-300/85 underline-offset-[3px] transition hover:decoration-zinc-500 dark:text-zinc-50 dark:decoration-zinc-600 dark:hover:decoration-zinc-400 sm:min-h-0"
-                    >
-                      jeffrey@v1tov2.com
-                    </a>
-                    <div className="mt-5">
-                      <a
-                        href={BUSINESS_SYSTEMS_CONSULTATION_MAILTO}
-                        className="inline-flex min-h-[48px] w-full items-center justify-center rounded-lg px-6 text-[15px] font-semibold transition hover:opacity-95 active:opacity-90"
-                        style={{
-                          background: ACCENT,
-                          color: ACCENT_INK,
-                        }}
-                      >
-                        Book a consultation
-                      </a>
-                    </div>
-                    <p className="mt-4 border-t border-zinc-300/35 pt-3 text-[10.5px] leading-snug text-zinc-400 dark:border-zinc-600/40 dark:text-zinc-500">
-                      <span className="text-zinc-400 dark:text-zinc-500">
-                        General inbox:{" "}
-                      </span>
-                      <Link
-                        href={MAIL_HELLO}
-                        className="mono text-zinc-400 underline decoration-zinc-300/55 underline-offset-2 transition hover:text-zinc-600 hover:decoration-zinc-400 dark:text-zinc-500 dark:decoration-zinc-600/70 dark:hover:text-zinc-300"
-                      >
-                        hello@v1tov2.com
-                      </Link>
-                    </p>
-                  </div>
-                </div>
+                <ContactForm
+                  sourcePage="/business-systems"
+                  defaultServiceInterest="Business systems / workflow automation"
+                  compact
+                />
               </div>
             </div>
-
-            <p className="mono mx-auto mt-7 max-w-[46.5rem] text-[12px] text-zinc-500 dark:text-zinc-500 lg:mt-6">
-              <Link
-                href="/"
-                className="text-zinc-600 underline-offset-2 transition hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200"
-              >
-                ← Back to V1toV2 home
-              </Link>
-            </p>
           </div>
         </section>
       </main>
